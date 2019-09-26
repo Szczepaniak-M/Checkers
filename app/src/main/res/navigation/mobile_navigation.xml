@@ -15,7 +15,7 @@
         android:id="@+id/nav_gallery"
         android:name="org.pwanb.checkers.ui.game.GameFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_game" />
 
 
 </navigation>
