@@ -1,19 +1,37 @@
 package org.pwanb.checkers.ui.game;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class GameViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<Boolean> playerWhite;
+    private MutableLiveData<Boolean> playerRed;
 
     public GameViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        playerWhite = new MutableLiveData<>();
+        playerWhite.setValue(true);
+
+        playerRed = new MutableLiveData<>();
+        playerRed.setValue(true);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public boolean isPlayerWhite() {
+        return playerWhite.getValue();
     }
+
+    public boolean isPlayerRed() {
+        return playerRed.getValue();
+    }
+
+    public void setPlayerWhite(boolean playerWhite) {
+        this.playerWhite.setValue(playerWhite);
+    }
+
+    public void setPlayerRed(boolean playerRed) {
+        this.playerRed.setValue(playerRed);
+    }
+
+
 }
+

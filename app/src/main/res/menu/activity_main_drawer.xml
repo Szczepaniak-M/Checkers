@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_menu"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
@@ -16,15 +17,14 @@
     </group>
 
     <item
-        android:title="@string/game_option"
         android:id="@+id/nav_game_option"
-        android:visible="false"
-        >
+        android:title="@string/game_option"
+        android:visible="false">
         <menu>
             <item
-            android:id="@+id/nav_computer"
-            android:icon="@drawable/ic_computer"
-            android:title="@string/computer" />
+                android:id="@+id/nav_computer"
+                android:icon="@drawable/ic_computer"
+                android:title="@string/computer" />
 
             <item
                 android:id="@+id/nav_player"

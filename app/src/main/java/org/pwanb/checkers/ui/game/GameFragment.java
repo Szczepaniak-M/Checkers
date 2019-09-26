@@ -24,6 +24,7 @@ public class GameFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         gameViewModel =
                 ViewModelProviders.of(this).get(GameViewModel.class);
+        container.removeAllViews();
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         final double SCALE = displayMetrics.widthPixels / 1080.0;
@@ -49,6 +50,17 @@ public class GameFragment extends Fragment {
                 }
             }
         }
+
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Bundle args = getArguments();
+        if (args != null) {
+            gameViewModel.setPlayerWhite(args.getBoolean("whitePlayer"));
+            gameViewModel.setPlayerRed(args.getBoolean("redPlayer"));
+        }
     }
 }

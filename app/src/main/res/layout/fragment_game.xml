@@ -1,306 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_game"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/root"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#DDDDDD"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/Board"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/board"
-            android:src="@mipmap/board" />
-
-        <ImageView
-            android:id="@+id/Field_0_0"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
-
-        <ImageView
-            android:id="@+id/Field_2_0"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
-
-        <ImageView
-            android:id="@+id/Field_4_0"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
-
-        <ImageView
-            android:id="@+id/Field_6_0"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    android:layout_height="match_parent"
+    android:background="#DDDDDD">
 
 
-        <ImageView
-            android:id="@+id/Field_1_1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Board"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/board"
+        android:src="@mipmap/board" />
+
+    <ImageView
+        android:id="@+id/Field_0_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
+
+    <ImageView
+        android:id="@+id/Field_2_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
+
+    <ImageView
+        android:id="@+id/Field_4_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
+
+    <ImageView
+        android:id="@+id/Field_6_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_3_1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_1_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_5_1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_3_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_7_1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
-
-        <ImageView
-            android:id="@+id/Field_0_2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_5_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_2_2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_7_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
+
+    <ImageView
+        android:id="@+id/Field_0_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_4_2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_2_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_6_2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_4_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_1_3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_6_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_3_3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_1_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_5_3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_3_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_7_3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
-
-        <ImageView
-            android:id="@+id/Field_0_4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_5_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_2_4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_7_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
+
+    <ImageView
+        android:id="@+id/Field_0_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_4_4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_2_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_6_4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_4_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_1_5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_6_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_3_5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_1_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_5_5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_3_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_7_5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
-
-        <ImageView
-            android:id="@+id/Field_0_6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_5_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_2_6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_7_5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
+
+    <ImageView
+        android:id="@+id/Field_0_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_4_6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_2_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_6_6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_4_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_1_7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_6_6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_3_7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_1_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_5_7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_3_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
 
-        <ImageView
-            android:id="@+id/Field_7_7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/field"
-            android:padding="3dp"
-            android:src="@mipmap/empty" />
+    <ImageView
+        android:id="@+id/Field_5_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
 
-    </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/Field_7_7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/field"
+        android:padding="3dp"
+        android:src="@mipmap/empty" />
+
+</FrameLayout>
