@@ -3,19 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_home"
         android:name="org.pwanb.checkers.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_rules"
+            app:destination="@id/nav_rules"
+            app:popUpTo="@+id/nav_rules"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_game"
+            app:destination="@id/nav_game"
+            app:popUpTo="@+id/nav_game"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_game"
         android:name="org.pwanb.checkers.ui.game.GameFragment"
         android:label="@string/menu_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game">
+        <argument
+            android:name="white"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <argument
+            android:name="red"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <action
+            android:id="@+id/action_nav_game_to_nav_rules"
+            app:destination="@id/nav_rules"
+            app:popUpTo="@+id/nav_rules"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_game_to_nav_home2"
+            app:destination="@id/nav_home"
+            app:popUpTo="@+id/nav_home"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_rules"
+        android:name="org.pwanb.checkers.ui.rules.RulesFragment"
+        android:label="@string/menu_rules"
+        tools:layout="@layout/fragment_rules">
+        <action
+            android:id="@+id/action_nav_rules_to_nav_game"
+            app:destination="@id/nav_game"
+            app:popUpTo="@+id/nav_game"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_rules_to_nav_home2"
+            app:destination="@id/nav_home"
+            app:popUpTo="@+id/nav_home"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 
 </navigation>

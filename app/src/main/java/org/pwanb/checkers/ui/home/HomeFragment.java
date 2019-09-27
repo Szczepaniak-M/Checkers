@@ -10,14 +10,15 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 
-import com.google.android.material.navigation.NavigationView;
+
 
 import org.pwanb.checkers.R;
-import org.pwanb.checkers.ui.game.GameFragment;
+import org.pwanb.checkers.ui.game.GameFragmentDirections;
+
 
 public class HomeFragment extends Fragment {
 
@@ -68,17 +69,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void replaceGameFragment(boolean white, boolean red) {
-        FragmentActivity fragmentActivity = getActivity();
-        GameFragment gameFragment = new GameFragment ();
-        Bundle args = new Bundle();
-        args.putBoolean("whitePlayer", white);
-        args.putBoolean("redPlayer", red);
-        gameFragment.setArguments(args);
-        fragmentActivity.getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, gameFragment)
-                .commit();
-        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(R.id.nav_game);
-        navigationView.getMenu().findItem(R.id.nav_game_option).setVisible(true);
+        HomeFragmentDirections.ActionNavHomeToNavGame action =  HomeFragmentDirections.actionNavHomeToNavGame();
+        action.setRed(white);
+        action.setRed(red);
+        Navigation.findNavController(getView()).navigate(action);
+
     }
 }

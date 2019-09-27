@@ -44,4 +44,5 @@
         When there are a few capturing possibility, the player must chose the one, which remove
         the greatest amount of opponent\'s pieces.
     </string>
+    <string name="menu_rules">Rules</string>
 </resources>

@@ -50,6 +50,9 @@ public class GameFragment extends Fragment {
                 }
             }
         }
+        boolean red = GameFragmentArgs.fromBundle(getArguments()).getRed();
+        boolean white = GameFragmentArgs.fromBundle(getArguments()).getWhite();
+        System.out.println(red+" "+white);
 
         return view;
     }

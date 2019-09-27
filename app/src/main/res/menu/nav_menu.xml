@@ -14,10 +14,9 @@
             android:icon="@drawable/ic_play"
             android:title="@string/game" />
         <item
-            android:id="@+id/nax_rules"
+            android:id="@+id/nav_rules"
             android:icon="@drawable/ic_info"
             android:title="@string/rules" />
-
     </group>
 
     <item
@@ -35,7 +34,7 @@
                 android:icon="@drawable/ic_player"
                 android:title="@string/player" />
             <item
-                android:id="@+id/nax_replay"
+                android:id="@+id/nav_replay"
                 android:icon="@drawable/ic_replay"
                 android:title="@string/replay" />
 
@@ -44,7 +43,7 @@
     </item>
 
     <item
-        android:id="@+id/nax_authors"
+        android:id="@+id/nav_authors"
         android:icon="@drawable/ic_info"
         android:title="@string/authors" />
 
