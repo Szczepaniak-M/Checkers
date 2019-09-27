@@ -2,25 +2,17 @@ package org.pwanb.checkers.ui.home;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -30,15 +22,13 @@ import org.pwanb.checkers.ui.game.GameFragment;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private Button btnPlayer;
-    private Button btnComputer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        btnComputer = view.findViewById(R.id.btn_computer);
+        Button btnComputer = view.findViewById(R.id.btn_computer);
         btnComputer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -67,7 +57,7 @@ public class HomeFragment extends Fragment {
                 dialog.show();
             }
         });
-        btnPlayer = view.findViewById(R.id.btn_player);
+        Button btnPlayer = view.findViewById(R.id.btn_player);
         btnPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -76,7 +66,8 @@ public class HomeFragment extends Fragment {
         });
         return view;
     }
-    public void replaceGameFragment(boolean white, boolean red) {
+
+    private void replaceGameFragment(boolean white, boolean red) {
         FragmentActivity fragmentActivity = getActivity();
         GameFragment gameFragment = new GameFragment ();
         Bundle args = new Bundle();
@@ -84,7 +75,7 @@ public class HomeFragment extends Fragment {
         args.putBoolean("redPlayer", red);
         gameFragment.setArguments(args);
         fragmentActivity.getSupportFragmentManager().beginTransaction()
-                .replace(R.id.nav_host_fragment, gameFragment)
+                .replace(R.id.fragment_container, gameFragment)
                 .commit();
         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_game);

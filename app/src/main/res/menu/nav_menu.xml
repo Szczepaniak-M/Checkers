@@ -13,6 +13,10 @@
             android:id="@+id/nav_game"
             android:icon="@drawable/ic_play"
             android:title="@string/game" />
+        <item
+            android:id="@+id/nax_rules"
+            android:icon="@drawable/ic_info"
+            android:title="@string/rules" />
 
     </group>
 
@@ -34,12 +38,14 @@
                 android:id="@+id/nax_replay"
                 android:icon="@drawable/ic_replay"
                 android:title="@string/replay" />
-            <item
-                android:id="@+id/nax_rules"
-                android:icon="@drawable/ic_info"
-                android:title="@string/rules" />
+
         </menu>
 
     </item>
+
+    <item
+        android:id="@+id/nax_authors"
+        android:icon="@drawable/ic_info"
+        android:title="@string/authors" />
 
 </menu>
