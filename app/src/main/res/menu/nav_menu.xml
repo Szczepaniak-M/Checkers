@@ -20,9 +20,9 @@
     </group>
 
     <item
-        android:id="@+id/nav_game_option"
         android:title="@string/game_option"
-        android:visible="false">
+        android:visible="false"
+        android:id="@+id/nav_game_option">
         <menu>
             <item
                 android:id="@+id/nav_computer"
@@ -43,8 +43,16 @@
     </item>
 
     <item
-        android:id="@+id/nav_authors"
-        android:icon="@drawable/ic_info"
-        android:title="@string/authors" />
+        android:title="@string/Other"
+        android:id="@+id/nav_other">
+        <menu>
+            <item
+                android:id="@+id/nav_authors"
+                android:icon="@drawable/ic_info"
+                android:title="@string/authors" />
+        </menu>
+    </item>
 
 </menu>
+
+
