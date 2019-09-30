@@ -1,4 +1,4 @@
-package org.pwanb.checkers.application;
+package org.pwanb.checkers.ui.game;
 
 final class Pair {
     private boolean set;

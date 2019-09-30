@@ -1,12 +1,14 @@
-package org.pwanb.checkers.application;
+package org.pwanb.checkers.ui.game;
 
+
+import org.pwanb.checkers.R;
 
 enum PawnGraphics {
-    BLACK_PAWN(R.drawable.black_pawn),
-    BLACK_KING(R.drawable.black_king),
-    WHITE_PAWN(R.drawable.white_pawn),
-    WHITE_KING(R.drawable.white_king),
-    EMPTY(R.drawable.empty);
+    BLACK_PAWN(R.mipmap.red_man),
+    BLACK_KING(R.mipmap.red_king),
+    WHITE_PAWN(R.mipmap.white_man),
+    WHITE_KING(R.mipmap.white_king),
+    EMPTY(R.mipmap.empty);
 
     int graphic;
 

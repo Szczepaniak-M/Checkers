@@ -1,9 +1,10 @@
+package org.pwanb.checkers.ui.game;
+
 /**
  * ALL DAMN RIGHTS RESERVED. !!!! 2019 (R)
- */
-package org.pwanb.checkers.application;
 
 
+ /**
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.app.AlertDialog;
@@ -18,7 +19,7 @@ import android.widget.ImageView;
 
 /**
  * @author Codename "P.W.A.N.B"
- */
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -90,4 +91,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-}
+} */

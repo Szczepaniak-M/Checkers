@@ -1,4 +1,4 @@
-package org.pwanb.checkers.application;
+package org.pwanb.checkers.ui.game;
 
 enum Result {
 

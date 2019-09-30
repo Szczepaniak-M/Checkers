@@ -1,15 +1,15 @@
-package org.pwanb.checkers.application;
+package org.pwanb.checkers.ui.game;
 
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.widget.AppCompatImageView;
 import android.widget.ImageView;
 import android.view.View;
 import android.graphics.drawable.Drawable;
 
 
+import org.pwanb.checkers.R;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -32,7 +32,7 @@ class Board{
     private boolean isCopy;
 
 
-    class Field implements AppCompatImageView.OnClickListener {
+    class Field implements ImageView.OnClickListener {
 
         private ImageView image;
         private Pair position;
