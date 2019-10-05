@@ -9,18 +9,18 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_game">Game</string>
-    <string name="authors">Authors</string>
-    <string name="player">Change computer to player</string>
-    <string name="computer">Change player to computer</string>
+    <string name="menu_about">About</string>
     <string name="game_option">Game Option</string>
-    <string name="game">Checkers</string>
-    <string name="replay">Reset game</string>
-    <string name="rules">Rules</string>
+    <string name="menu_player">Change computer to player</string>
+    <string name="menu_computer">Change player to computer</string>
+    <string name="menu_replay">Reset game</string>
     <string name="btn_player">Play with Friend</string>
     <string name="btn_computer">Play with Computer</string>
     <string name="field">Field</string>
     <string name="board">Board</string>
-    <string name="chose">I want to play as:</string>
+    <string name="dialog_home">HomeDialogFragment</string>
+    <string name="dialog_game">GameDialogFragment</string>
+    <string name="rules">Rules</string>
     <string name="rules_info">
         The game is played  on an 8×8 checkerboard. \n\n
         Every player starts the game with 12 pieces set on dark squares. \n\n
@@ -44,6 +44,19 @@
         When there are a few capturing possibility, the player must chose the one, which remove
         the greatest amount of opponent\'s pieces.
     </string>
-    <string name="menu_rules">Rules</string>
+    <string name="author">Authors</string>
+    <string name="author_names">Michał Szczepaniak \n
+    AI made in cooperation with Zuzanna Trafas</string>
     <string name="Other">Other options</string>
+    <string name="chose">I want to play as:</string>
+    <string name="cancel">CANCEL</string>
+    <string name="red">Red</string>
+    <string name="white">White</string>
+    <string name="draw">DRAW</string>
+    <string name="red_win">The RED player is winner</string>
+    <string name="white_win">The WHITE player is winner</string>
+    <string name="exit">EXIT</string>
+    <string name="player">Player</string>
+    <string name="computer">Computer</string>
+    <string name="once_again">I want to play once again with:  </string>
 </resources>

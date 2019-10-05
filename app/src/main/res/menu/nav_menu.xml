@@ -12,12 +12,15 @@
         <item
             android:id="@+id/nav_game"
             android:icon="@drawable/ic_play"
-            android:title="@string/game" />
+            android:title="@string/menu_game" />
         <item
-            android:id="@+id/nav_rules"
+            android:id="@+id/nav_about"
             android:icon="@drawable/ic_info"
-            android:title="@string/rules" />
+            android:title="@string/menu_about" />
     </group>
+
+
+
 
     <item
         android:title="@string/game_option"
@@ -27,31 +30,23 @@
             <item
                 android:id="@+id/nav_computer"
                 android:icon="@drawable/ic_computer"
-                android:title="@string/computer" />
+                android:title="@string/menu_computer" />
 
             <item
                 android:id="@+id/nav_player"
                 android:icon="@drawable/ic_player"
-                android:title="@string/player" />
+                android:title="@string/menu_player" />
             <item
                 android:id="@+id/nav_replay"
                 android:icon="@drawable/ic_replay"
-                android:title="@string/replay" />
+                android:title="@string/menu_replay" />
 
         </menu>
-
     </item>
 
-    <item
-        android:title="@string/Other"
-        android:id="@+id/nav_other">
-        <menu>
-            <item
-                android:id="@+id/nav_authors"
-                android:icon="@drawable/ic_info"
-                android:title="@string/authors" />
-        </menu>
-    </item>
+
+
+
 
 </menu>
 

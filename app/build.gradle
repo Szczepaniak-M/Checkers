@@ -4,7 +4,7 @@ apply plugin: "androidx.navigation.safeargs"
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "org.pwanb.checkers"
+        applicationId "pl.michalsz.checkers"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1

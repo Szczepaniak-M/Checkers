@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="org.pwanb.checkers.ui.home.HomeFragment"
+        android:name="pl.michalsz.checkers.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_nav_home_to_nav_rules"
-            app:destination="@id/nav_rules"
-            app:popUpTo="@+id/nav_rules"
+            android:id="@+id/action_nav_home_to_nav_home_alert"
+            app:destination="@id/nav_home_alert"
+            app:popUpTo="@+id/nav_home_alert"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_nav_home_to_nav_game"
@@ -24,45 +24,57 @@
 
     <fragment
         android:id="@+id/nav_game"
-        android:name="org.pwanb.checkers.ui.game.GameFragment"
+        android:name="pl.michalsz.checkers.ui.game.GameFragment"
         android:label="@string/menu_game"
         tools:layout="@layout/fragment_game">
         <argument
             android:name="white"
-            app:argType="boolean"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:argType="boolean" />
         <argument
             android:name="red"
-            app:argType="boolean"
-            android:defaultValue="true" />
+            android:defaultValue="true"
+            app:argType="boolean" />
         <action
-            android:id="@+id/action_nav_game_to_nav_rules"
-            app:destination="@id/nav_rules"
-            app:popUpTo="@+id/nav_rules"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_nav_game_to_nav_home2"
-            app:destination="@id/nav_home"
-            app:popUpTo="@+id/nav_home"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_nav_game_to_nav_game_alert"
+            app:destination="@id/nav_game_alert" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_rules"
-        android:name="org.pwanb.checkers.ui.rules.RulesFragment"
-        android:label="@string/menu_rules"
-        tools:layout="@layout/fragment_rules">
+        android:id="@+id/nav_about"
+        android:name="pl.michalsz.checkers.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
+    <dialog
+        android:id="@+id/nav_home_alert"
+        android:name="pl.michalsz.checkers.ui.home.HomeDialogFragment"
+        android:label="@string/dialog_home"
+        tools:layout="@layout/fragment_dialog_home">
         <action
-            android:id="@+id/action_nav_rules_to_nav_game"
-            app:destination="@id/nav_game"
+            android:id="@+id/action_nav_home_alert_to_nav_game"
+            app:destination="@+id/nav_game"
             app:popUpTo="@+id/nav_game"
             app:popUpToInclusive="true" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/nav_game_alert"
+        android:name="pl.michalsz.checkers.ui.game.GameDialogFragment"
+        android:label="@string/dialog_game"
+        tools:layout="@layout/fragment_dialog_game">
+        <argument
+            android:name="winner"
+            android:defaultValue="0"
+            app:argType="integer" />
+
         <action
-            android:id="@+id/action_nav_rules_to_nav_home2"
-            app:destination="@id/nav_home"
-            app:popUpTo="@+id/nav_home"
-            app:popUpToInclusive="true" />
-    </fragment>
+            android:id="@+id/action_nav_game_alert_to_nav_home_alert"
+            app:destination="@id/nav_home_alert" />
+        <action
+            android:id="@+id/action_nav_game_alert_to_nav_game"
+            app:destination="@id/nav_game" />
+    </dialog>
 
 
 </navigation>
