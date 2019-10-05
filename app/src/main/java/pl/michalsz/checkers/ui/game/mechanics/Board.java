@@ -261,7 +261,7 @@ public class Board{
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if(i%2==j%2)
-                board[i][j] = new Field(oldBoard.board[i][j]);
+                    board[i][j] = new Field(oldBoard.board[i][j]);
             }
         }
         for(int i =0 ;i<12;i++)
