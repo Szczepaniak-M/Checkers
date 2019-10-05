@@ -18,6 +18,12 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 
+//TODO uzywac move od przenoszenia pionka
+//TODO usunac if != null
+//TODO zamienic tablice statyczne na dynamiczne ArrayList
+//TODO w atackAI wywolywac attack
+//TODO polączyć przez referencje whitePawns i blackPawns z board (najpierw przypisac w nowe miejsce potem dopiero null w stare)
+
 public class Board{
     private boolean whiteTurn;
     private Pair chosenField;
