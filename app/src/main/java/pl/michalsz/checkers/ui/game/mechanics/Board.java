@@ -18,7 +18,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 
-class Board{
+public class Board{
     private boolean whiteTurn;
     private Pair chosenField;
     private Field[][] board = new Field[8][8];
@@ -235,7 +235,7 @@ class Board{
     }
 
 
-    Board(ImageView[][] boardMain, Activity activity) {
+    public Board(ImageView[][] boardMain, Activity activity) {
         isCopy = false;
         isAlert = false;
         chosenField = new Pair();
@@ -244,7 +244,9 @@ class Board{
         drawBlack = 0;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                board[i][j] = new Field(i, j, boardMain[i][j]);
+                if(i%2==j%2) {
+                    board[i][j] = new Field(i, j, boardMain[i][j]);
+                }
             }
         }
     }
@@ -258,6 +260,7 @@ class Board{
         this.activity = oldBoard.activity;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
+                if(i%2==j%2)
                 board[i][j] = new Field(oldBoard.board[i][j]);
             }
         }
@@ -297,7 +300,7 @@ class Board{
         whiteTurn =! whiteTurn;
     }
 
-    void start() {
+    public void start() {
         isAlert = false;
         whiteTurn = true;
         for (int i = 0; i < 4; i++) {

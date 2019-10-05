@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import  pl.michalsz.checkers.R;
+import pl.michalsz.checkers.ui.game.mechanics.Board;
 
 public class GameFragment extends Fragment {
 
@@ -59,8 +60,8 @@ public class GameFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //NavHostFragment navHostFragment =
-       // Log.d("XDDD", navController.getCurrentDestination() + "");
+        Board board = new Board(boardMain, getActivity());
+        board.start();
     }
 
     @Override
