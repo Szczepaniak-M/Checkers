@@ -1,7 +1,6 @@
 package pl.michalsz.checkers.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import pl.michalsz.checkers.R;
 public class HomeDialogFragment extends DialogFragment {
 
 
-    NavController navController;
+    private NavController navController;
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -27,7 +26,6 @@ public class HomeDialogFragment extends DialogFragment {
         TextView txtWhite = view.findViewById(R.id.action_white);
         TextView txtCancel = view.findViewById(R.id.action_cancel);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-        Log.d("XDDD", navController + "");
 
         txtRed.setOnClickListener(new View.OnClickListener() {
             @Override

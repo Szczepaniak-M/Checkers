@@ -21,11 +21,6 @@ final class Pair {
         Y = oldPair.Y;
     }
 
-    @Override
-    public String toString() {
-        return X + " " + Y;
-    }
-
     int getX() {
         return X;
     }
@@ -34,16 +29,16 @@ final class Pair {
         return Y;
     }
 
-    void set(int x, int y) {
-        set = true;
-        X = x;
-        Y = y;
-    }
-
     void set(Pair pair) {
         set = true;
         this.X = pair.X;
         this.Y = pair.Y;
+    }
+
+    void set(int x, int y) {
+        set = true;
+        X = x;
+        Y = y;
     }
 
     void unset() {
@@ -52,6 +47,11 @@ final class Pair {
 
     boolean isSet() {
         return set;
+    }
+
+    @Override
+    public String toString() {
+        return X + " " + Y;
     }
 
     @Override

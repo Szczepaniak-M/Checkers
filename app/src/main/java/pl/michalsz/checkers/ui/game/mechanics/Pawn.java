@@ -27,6 +27,54 @@ class Pawn implements Comparable<Pawn>{
             possibleAction.add(new LinkedList<>(oldPawn.possibleAction.get(i)));
     }
 
+    Pair getCurrentPosition() {
+        return currentPosition;
+    }
+
+    LinkedList<LinkedList<Pair>> getPossibleAction() {
+        return possibleAction;
+    }
+
+    int getAmountOfActions() {
+        return  amountOfActions;
+    }
+
+    void setCurrentPosition(Pair currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
+    int setPossibleAction(LinkedList<LinkedList<Pair>> possibleAttack){
+        setPossibleActionEmpty();
+        amountOfActions = possibleAttack.get(0).size();
+        for(int i = 0; i < possibleAttack.size(); i++)
+            this.possibleAction.add(new LinkedList<>(possibleAttack.get(i)));
+        return amountOfActions;
+    }
+
+    void setPossibleAction(Pair possibleMove) {
+        this.possibleAction.add(new LinkedList<>(Collections.singletonList(possibleMove)));
+        amountOfActions = possibleAction.size();
+    }
+
+    void setPossibleActionEmpty(){
+        for(int i = 0; i < possibleAction.size(); i++)
+            possibleAction.get(i).clear();
+        possibleAction.clear();
+        amountOfActions = 0;
+    }
+
+    void setKing() {
+        this.king = true;
+    }
+
+    boolean isKing() {
+        return king;
+    }
+
+    boolean isWhite() {
+        return white;
+    }
+
     @Override
     public int compareTo(Pawn other) { return (this.amountOfActions - other.amountOfActions)* -1; }
 
@@ -44,41 +92,4 @@ class Pawn implements Comparable<Pawn>{
     public String toString(){
         return "Pawn: " + currentPosition.getX() + " " + currentPosition.getY() + " ";
     }
-
-    Pair getCurrentPosition() { return currentPosition; }
-
-    LinkedList<LinkedList<Pair>> getPossibleAction() { return possibleAction; }
-
-    int getAmountOfActions() {return  amountOfActions; }
-
-    int setPossibleAttack(LinkedList<LinkedList<Pair>> possibleAttack){
-        setPossibleActionEmpty();
-        amountOfActions = possibleAttack.get(0).size();
-        for(int i = 0; i < possibleAttack.size(); i++)
-            this.possibleAction.add(new LinkedList<>(possibleAttack.get(i)));
-        return amountOfActions;
-    }
-
-    void setPossibleMove(Pair possibleMove) {
-        this.possibleAction.add(new LinkedList<>(Collections.singletonList(possibleMove)));
-        amountOfActions = possibleAction.size();
-    }
-
-    void setPossibleActionEmpty(){
-        for(int i = 0; i < possibleAction.size(); i++)
-            possibleAction.get(i).clear();
-        possibleAction.clear();
-        amountOfActions = 0;
-    }
-
-    void setKing() { this.king = true; }
-
-    void setCurrentPosition(Pair currentPosition) { this.currentPosition = currentPosition; }
-
-    boolean isKing() { return king; }
-
-    boolean isWhite() { return white; }
-
-
-
 }

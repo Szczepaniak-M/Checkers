@@ -25,7 +25,7 @@ class Field implements ImageView.OnClickListener {
         pawn = null;
     }
 
-    Field(Field oldField,Board newBoard) {
+    Field(Field oldField, Board newBoard) {
         this.board = newBoard; //TODO tu moze byc problem z AI
         position = new Pair(oldField.position);
         image = null;
@@ -44,14 +44,38 @@ class Field implements ImageView.OnClickListener {
         return pawn;
     }
 
-    void setHighlight(final Activity activity, int id) {
-        Drawable highlight = activity.getResources().getDrawable(id);
-        image.setBackground(highlight);
+    ImageView getImage() {
+        return image;
+    }
+
+    void setPawn(Pawn pawn) {
+        this.pawn = pawn;
     }
 
     void setPawn(int x, int y, boolean white, int imageID) {
         this.pawn = new Pawn(x, y, white);
         image.setImageResource(imageID);
+    }
+
+    void setHighlight(final Activity activity, int id) {
+        Drawable highlight = activity.getResources().getDrawable(id);
+        image.setBackground(highlight);
+    }
+
+    void setImage(boolean white, boolean king) {
+        if (white) {
+            if (king) {
+                image.setImageResource(R.mipmap.white_king);
+            } else {
+                image.setImageResource(R.mipmap.white_man);
+            }
+        } else {
+            if (king) {
+                image.setImageResource(R.mipmap.red_king);
+            } else {
+                image.setImageResource(R.mipmap.red_man);
+            }
+        }
     }
 
     void deleteHighlightField() {
@@ -90,7 +114,7 @@ class Field implements ImageView.OnClickListener {
                     board.deleteHighlightBoard();
                     board.setHighlight(this, R.drawable.highlight_organe);
                     chosenField.set(position);
-                    showOptionForMove();
+                    showFieldMoveOption();
                 } else {
                     board.deleteHighlightBoard();
                     chosenField.unset();
@@ -98,7 +122,7 @@ class Field implements ImageView.OnClickListener {
             } else {
                 board.setHighlight(this, R.drawable.highlight_organe);
                 chosenField.set(position);
-                showOptionForMove();
+                showFieldMoveOption();
             }
         }
     }
@@ -124,8 +148,7 @@ class Field implements ImageView.OnClickListener {
         }
     }
 
-    private void showOptionForMove() {
-
+    private void showFieldMoveOption() {
         for (LinkedList<Pair> field : pawn.getPossibleAction()) {
             board.setHighlight(board.getField(field.getFirst()), R.drawable.highlight_organe);
         }
@@ -136,19 +159,19 @@ class Field implements ImageView.OnClickListener {
             if (chosenField.isSet()) {
                 if (!chosenField.equals(position)) {
                     board.deleteHighlightBoard();
-                    board.showAttackOption();
                     board.setHighlight(this, R.drawable.highlight_organe);
                     chosenField.set(position);
-                    showOptionForAttack();
+                    board.showAllAttackOption();
+                    showFieldAttackOption();
                 } else {
                     board.deleteHighlightBoard();
-                    board.showAttackOption();
+                    board.showAllAttackOption();
                     chosenField.unset();
                 }
             } else {
                 board.setHighlight(this, R.drawable.highlight_organe);
                 chosenField.set(position);
-                showOptionForAttack();
+                showFieldAttackOption();
             }
         }
     }
@@ -162,7 +185,7 @@ class Field implements ImageView.OnClickListener {
                 chosenField.set(position.getX(), position.getY());
                 if (!updateAttack(chosenField)) {
                     board.addAttackOption(pawn);
-                    board.showAttackOption();
+                    board.showAllAttackOption();
                     chosenField.unset();
                     attackFirstClick(chosenField);
                 } else {
@@ -180,8 +203,7 @@ class Field implements ImageView.OnClickListener {
         }
     }
 
-
-    private void showOptionForAttack() {
+    private void showFieldAttackOption() {
         for (LinkedList<Pair> path : pawn.getPossibleAction()) {
             board.setHighlight(board.getField(path.get(1)), R.drawable.highlight_organe);
         }
@@ -205,17 +227,9 @@ class Field implements ImageView.OnClickListener {
         if ((Y == 7 && board.isWhiteTurn()) || (Y == 0 && !board.isWhiteTurn())) {
             pawn.setKing();
             if (image != null) {
-                image.setImageResource(PawnGraphics.get(board.isWhiteTurn(), pawn.isKing()));
+                this.setImage(board.isWhiteTurn(), pawn.isKing());
             }
         }
 
-    }
-
-    ImageView getImage() {
-        return image;
-    }
-
-    void setPawn(Pawn pawn) {
-        this.pawn = pawn;
     }
 }

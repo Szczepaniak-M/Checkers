@@ -45,8 +45,7 @@
         the greatest amount of opponent\'s pieces.
     </string>
     <string name="author">Authors</string>
-    <string name="author_names">Michał Szczepaniak \n
-    AI made in cooperation with Zuzanna Trafas</string>
+    <string name="author_names">Michał Szczepaniak</string>
     <string name="Other">Other options</string>
     <string name="chose">I want to play as:</string>
     <string name="cancel">CANCEL</string>

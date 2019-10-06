@@ -4,9 +4,6 @@ package pl.michalsz.checkers.ui.game.mechanics;
 import android.app.Activity;
 import android.widget.ImageView;
 
-
-import java.util.ArrayList;
-
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -152,12 +149,12 @@ public class Board {
     public void start() {
         whiteTurn = true;
         for (int i = 0; i < 4; i++) {
-            board[2 * i][0].setPawn(2 * i, 0, true, PawnGraphics.WHITE_PAWN.get());
-            board[2 * i + 1][1].setPawn(2 * i + 1, 1, true, PawnGraphics.WHITE_PAWN.get());
-            board[2 * i][2].setPawn(2 * i, 2, true, PawnGraphics.WHITE_PAWN.get());
-            board[2 * i + 1][5].setPawn(2 * i + 1, 5, false, PawnGraphics.BLACK_PAWN.get());
-            board[2 * i][6].setPawn(2 * i, 6, false, PawnGraphics.BLACK_PAWN.get());
-            board[2 * i + 1][7].setPawn(2 * i + 1, 7, false, PawnGraphics.BLACK_PAWN.get());
+            board[2 * i][0].setPawn(2 * i, 0, true, R.mipmap.white_man);
+            board[2 * i + 1][1].setPawn(2 * i + 1, 1, true, R.mipmap.white_man);
+            board[2 * i][2].setPawn(2 * i, 2, true, R.mipmap.white_man);
+            board[2 * i + 1][5].setPawn(2 * i + 1, 5, false, R.mipmap.red_man);
+            board[2 * i][6].setPawn(2 * i, 6, false, R.mipmap.red_man);
+            board[2 * i + 1][7].setPawn(2 * i + 1, 7, false, R.mipmap.red_man);
             whitePawns.add(board[2 * i][0].getPawn());
             whitePawns.add(board[2 * i + 1][1].getPawn());
             whitePawns.add(board[2 * i][2].getPawn());
@@ -170,24 +167,23 @@ public class Board {
 
     void possibleAction() {
         if (whiteTurn) {
-            searchAttack(whitePawns);
+            possibleAttack(whitePawns);
             if (attackOption.size() > 0) {
-                showAttackOption();
-
+                showAllAttackOption();
             } else {
-                searchMove(whitePawns);
+                possibleMove(whitePawns);
             }
         } else {
-            searchAttack(redPawns);
-            if (attackOption.size() > 0)
-                showAttackOption();
-            else
-                searchMove(redPawns);
+            possibleAttack(redPawns);
+            if (attackOption.size() > 0) {
+                showAllAttackOption();
+            } else {
+                possibleMove(redPawns);
+            }
         }
-
     }
 
-    private void searchMove(LinkedList<Pawn> pawns) {
+    private void possibleMove(LinkedList<Pawn> pawns) {
         boolean isMove = false;
         int x, y;
         for (Pawn pawn : pawns) {
@@ -197,44 +193,44 @@ public class Board {
             if (pawn.isKing()) {
                 int j = 1;
                 while (x + j < 8 && y + j < 8 && board[x + j][y + j].getPawn() == null) {
-                    pawn.setPossibleMove(new Pair(x + j, y + j));
+                    pawn.setPossibleAction(new Pair(x + j, y + j));
                     j++;
                 }
 
                 j = 1;
                 while (x - j > -1 && y + j < 8 && board[x - j][y + j].getPawn() == null) {
-                    pawn.setPossibleMove(new Pair(x - j, y + j));
+                    pawn.setPossibleAction(new Pair(x - j, y + j));
                     j++;
                 }
 
                 j = 1;
                 while (x - j > -1 && y - j > -1 && board[x - j][y - j].getPawn() == null) {
-                    pawn.setPossibleMove(new Pair(x - j, y - j));
+                    pawn.setPossibleAction(new Pair(x - j, y - j));
                     j++;
                 }
 
                 j = 1;
                 while (x + j < 8 && y - j > -1 && board[x + j][y - j].getPawn() == null) {
-                    pawn.setPossibleMove(new Pair(x + j, y - j));
+                    pawn.setPossibleAction(new Pair(x + j, y - j));
                     j++;
                 }
             } else {
                 if (whiteTurn) {
                     if (y < 7) {
                         if (x < 7 && board[x + 1][y + 1].getPawn() == null) {
-                            pawn.setPossibleMove(new Pair(x + 1, y + 1));
+                            pawn.setPossibleAction(new Pair(x + 1, y + 1));
                         }
                         if (x > 0 && board[x - 1][y + 1].getPawn() == null) {
-                            pawn.setPossibleMove(new Pair(x - 1, y + 1));
+                            pawn.setPossibleAction(new Pair(x - 1, y + 1));
                         }
                     }
                 } else {
                     if (y > 0) {
                         if (x < 7 && board[x + 1][y - 1].getPawn() == null) {
-                            pawn.setPossibleMove(new Pair(x + 1, y - 1));
+                            pawn.setPossibleAction(new Pair(x + 1, y - 1));
                         }
                         if (x > 0 && board[x - 1][y - 1].getPawn() == null) {
-                            pawn.setPossibleMove(new Pair(x - 1, y - 1));
+                            pawn.setPossibleAction(new Pair(x - 1, y - 1));
                         }
                     }
 
@@ -254,16 +250,16 @@ public class Board {
     }
 
 
-    private void searchAttack(LinkedList<Pawn> pawns) {
+    private void possibleAttack(LinkedList<Pawn> pawns) {
         boolean empty = true;
         int priority;
         for (Pawn pawn : pawns) {
             empty = false;
             pawn.setPossibleActionEmpty();
             if (pawn.isKing())
-                priority = pawn.setPossibleAttack(possibleAttackKing(pawn.getCurrentPosition(), new LinkedList<Pair>()));
+                priority = pawn.setPossibleAction(searchAttackKing(pawn.getCurrentPosition(), new LinkedList<Pair>()));
             else
-                priority = pawn.setPossibleAttack(possibleAttack(pawn.getCurrentPosition(), new LinkedList<Pair>()));
+                priority = pawn.setPossibleAction(searchAttack(pawn.getCurrentPosition(), new LinkedList<Pair>()));
 
             if (priority > 1) {
                 attackOption.add(pawn);
@@ -277,10 +273,21 @@ public class Board {
             } else {
                 end(1);
             }
+        } else{
+            Pawn option;
+            PriorityQueue<Pawn> newAttackOption = new PriorityQueue<>();
+            while (attackOption.peek() != null) {
+                option = attackOption.poll();
+                newAttackOption.add(option);
+                if (!attackOption.isEmpty() && option.getAmountOfActions() != attackOption.peek().getAmountOfActions())
+                    break;
+            }
+            attackOption = newAttackOption;
         }
+
     }
 
-    private LinkedList<LinkedList<Pair>> possibleAttack(Pair pawn, LinkedList<Pair> deleted) {
+    private LinkedList<LinkedList<Pair>> searchAttack(Pair pawn, LinkedList<Pair> deleted) {
         int x = pawn.getX();
         int y = pawn.getY();
         LinkedList<LinkedList<Pair>> help, outPossibleAttack = null;
@@ -288,14 +295,14 @@ public class Board {
             if (x < 6 && board[x + 1][y + 1].getPawn() != null && board[x + 1][y + 1].getPawn().isWhite() != whiteTurn
                     && board[x + 2][y + 2].getPawn() == null && !deleted.contains(new Pair(x + 1, y + 1))) {
                 deleted.addLast(new Pair(x + 1, y + 1));
-                outPossibleAttack = possibleAttack(new Pair(x + 2, y + 2), deleted);
+                outPossibleAttack = searchAttack(new Pair(x + 2, y + 2), deleted);
                 deleted.removeLast();
             }
 
             if (x > 1 && board[x - 1][y + 1].getPawn() != null && board[x - 1][y + 1].getPawn().isWhite() != whiteTurn
                     && board[x - 2][y + 2].getPawn() == null && !deleted.contains(new Pair(x - 1, y + 1))) {
                 deleted.addLast(new Pair(x - 1, y + 1));
-                help = possibleAttack(new Pair(x - 2, y + 2), deleted);
+                help = searchAttack(new Pair(x - 2, y + 2), deleted);
                 deleted.removeLast();
                 if (outPossibleAttack != null) {
                     if (outPossibleAttack.get(0).size() == help.get(0).size()) {
@@ -313,7 +320,7 @@ public class Board {
             if (x > 1 && board[x - 1][y - 1].getPawn() != null && board[x - 1][y - 1].getPawn().isWhite() != whiteTurn
                     && board[x - 2][y - 2].getPawn() == null && !deleted.contains(new Pair(x - 1, y - 1))) {
                 deleted.addLast(new Pair(x - 1, y - 1));
-                help = possibleAttack(new Pair(x - 2, y - 2), deleted);
+                help = searchAttack(new Pair(x - 2, y - 2), deleted);
                 deleted.removeLast();
                 if (outPossibleAttack != null) {
                     if (outPossibleAttack.get(0).size() == help.get(0).size()) {
@@ -329,7 +336,7 @@ public class Board {
             if (x < 6 && board[x + 1][y - 1].getPawn() != null && board[x + 1][y - 1].getPawn().isWhite() != whiteTurn
                     && board[x + 2][y - 2].getPawn() == null && !deleted.contains(new Pair(x + 1, y - 1))) {
                 deleted.addLast(new Pair(x + 1, y - 1));
-                help = possibleAttack(new Pair(x + 2, y - 2), deleted);
+                help = searchAttack(new Pair(x + 2, y - 2), deleted);
                 deleted.removeLast();
                 if (outPossibleAttack != null) {
                     if (outPossibleAttack.get(0).size() == help.get(0).size()) {
@@ -352,7 +359,7 @@ public class Board {
         return outPossibleAttack;
     }
 
-    private LinkedList<LinkedList<Pair>> possibleAttackKing(Pair pawn, LinkedList<Pair> deleted) {
+    private LinkedList<LinkedList<Pair>> searchAttackKing(Pair pawn, LinkedList<Pair> deleted) {
         int x = pawn.getX();
         int y = pawn.getY();
         int i = 1, j;
@@ -366,7 +373,7 @@ public class Board {
                     deleted.addLast(new Pair(x + i, y + i));
                     j = 1;
                     while (x + i + j < 8 && y + i + j < 8 && board[x + i + j][y + i + j].getPawn() == null) {
-                        help = possibleAttackKing(new Pair(x + i + j, y + i + j), deleted);
+                        help = searchAttackKing(new Pair(x + i + j, y + i + j), deleted);
                         if (outPossibleAttack != null) {
                             if (outPossibleAttack.get(0).size() == help.get(0).size())
                                 outPossibleAttack.addAll(help);
@@ -392,7 +399,7 @@ public class Board {
                     deleted.addLast(new Pair(x - i, y + i));
                     j = 1;
                     while (x - i - j > -1 && y + i + j < 8 && board[x - i - j][y + i + j].getPawn() == null) {
-                        help = possibleAttackKing(new Pair(x - i - j, y + i + j), deleted);
+                        help = searchAttackKing(new Pair(x - i - j, y + i + j), deleted);
                         if (outPossibleAttack != null) {
                             if (outPossibleAttack.get(0).size() == help.get(0).size())
                                 outPossibleAttack.addAll(help);
@@ -418,7 +425,7 @@ public class Board {
                     deleted.addLast(new Pair(x - i, y - i));
                     j = 1;
                     while (x - i - j > -1 && y - i - j > -1 && board[x - i - j][y - i - j].getPawn() == null) {
-                        help = possibleAttackKing(new Pair(x - i - j, y - i - j), deleted);
+                        help = searchAttackKing(new Pair(x - i - j, y - i - j), deleted);
                         if (outPossibleAttack != null) {
                             if (outPossibleAttack.get(0).size() == help.get(0).size())
                                 outPossibleAttack.addAll(help);
@@ -445,7 +452,7 @@ public class Board {
                     deleted.addLast(new Pair(x + i, y - i));
                     j = 1;
                     while (x + i + j < 8 && y - i - j > -1 && board[x + i + j][y - i - j].getPawn() == null) {
-                        help = possibleAttackKing(new Pair(x + i + j, y - i - j), deleted);
+                        help = searchAttackKing(new Pair(x + i + j, y - i - j), deleted);
                         if (outPossibleAttack != null) {
                             if (outPossibleAttack.get(0).size() == help.get(0).size())
                                 outPossibleAttack.addAll(help);
@@ -471,21 +478,8 @@ public class Board {
         return outPossibleAttack;
     }
 
-    private void choseAttackOption() {
-        Pawn option = null;
-        PriorityQueue<Pawn> newAttack = new PriorityQueue<>();
-        while (attackOption.peek() != null) {
-            if (option != null && option.getAmountOfActions() != attackOption.peek().getAmountOfActions())
-                break;
-            option = attackOption.poll();
-            newAttack.add(option);
-        }
-        attackOption = newAttack;
-    }
-
-    void showAttackOption() {
+    void showAllAttackOption() {
         int x, y;
-        choseAttackOption();
         for (Pawn pawn : attackOption) {
             x = pawn.getCurrentPosition().getX();
             y = pawn.getCurrentPosition().getY();
@@ -503,7 +497,7 @@ public class Board {
         board[dstX][dstY].setPawn(board[x][y].getPawn());
         board[dstX][dstY].getPawn().setCurrentPosition(destination);
         if (board[dstX][dstY].getImage() != null) {
-            board[dstX][dstY].getImage().setImageResource(PawnGraphics.get(whiteTurn, board[dstX][dstY].getPawn().isKing()));
+            board[dstX][dstY].setImage(whiteTurn, board[dstX][dstY].getPawn().isKing());
         }
         deleteHighlightBoard();
         board[x][y].deletePawn();
@@ -581,6 +575,7 @@ public class Board {
 
     void changeTurn() {
         whiteTurn = !whiteTurn;
+        attackOption.clear();
         possibleAction();
         chosenField.unset();
         if ((whiteTurn && whitePlayer)
@@ -611,25 +606,6 @@ public class Board {
         }
     }
 
-    LinkedList<Move> allMoves(final LinkedList<Pawn> pawns) {
-        LinkedList<Move> allMoves = new LinkedList<>();
-        if (attackOption.size() > 0) {
-            choseAttackOption();
-            for (Pawn p : attackOption) {
-                for (LinkedList<Pair> move : p.getPossibleAction()) {
-                    allMoves.add(new Move(p, move));
-                }
-            }
-        } else {
-            for (Pawn pawn : pawns) {
-                for (int j = 0; j < pawn.getAmountOfActions(); j++) {
-                    allMoves.add(new Move(pawn, pawn.getPossibleAction().get(j)));
-                }
-            }
-        }
-        return allMoves;
-    }
-
     void attackAI(Pawn pawn, LinkedList<Pair> listOfDestination) {
         Pair destination;
         listOfDestination.remove();
@@ -638,7 +614,6 @@ public class Board {
             attackWithPawn(pawn, destination);
             pawn.setCurrentPosition(destination);
         }
-        attackOption.clear();
         board[pawn.getCurrentPosition().getX()][pawn.getCurrentPosition().getY()].levelUp();
     }
 }

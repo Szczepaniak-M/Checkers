@@ -1,16 +1,15 @@
 package pl.michalsz.checkers.ui.game.mechanics;
 
 import java.util.LinkedList;
-
-
+import java.util.PriorityQueue;
 
 class Ai {
-    private DecisionTree decisionTree;
+
     private Move move;
 
     Ai(Board board){
         Board copyBoard = new Board(board, true);
-        decisionTree = makeDecisionTree(copyBoard);
+        DecisionTree decisionTree = makeDecisionTree(copyBoard);
         move = selectMove(decisionTree);
     }
 
@@ -20,8 +19,8 @@ class Ai {
 
     private DecisionTree makeDecisionTree(Board board) {
         board.possibleAction();
-        LinkedList<Move> allMoves = board.allMoves(board.getRedPawns());
-        DecisionTree mainTree = new DecisionTree(board, score(board), null, null);
+        LinkedList<Move> allMoves = allMoves(board.getAttackOption(),board.getRedPawns());
+        DecisionTree mainTree = new DecisionTree(score(board), null);
         for (Move move : allMoves) {
             Board tmpBoard =  new Board(board, true);
             tmpBoard.possibleAction();
@@ -32,10 +31,10 @@ class Ai {
             } else {
                 tmpBoard.movePawn(pawn, destination.get(0));
             }
-            DecisionTree firstLayer = new DecisionTree(tmpBoard, score(tmpBoard), move, null);
+            DecisionTree firstLayer = new DecisionTree(score(tmpBoard), move);
             tmpBoard.changeTurn();
             tmpBoard.possibleAction();
-            LinkedList<Move> firstMoves = tmpBoard.allMoves(tmpBoard.getWhitePawns());
+            LinkedList<Move> firstMoves = allMoves(tmpBoard.getAttackOption(), tmpBoard.getWhitePawns());
             for (Move move1 : firstMoves) {
                 Board tmpBoard1 = new Board(tmpBoard, true);
                 tmpBoard1.possibleAction();
@@ -48,8 +47,8 @@ class Ai {
                 }
                 tmpBoard1.changeTurn();
                 tmpBoard1.possibleAction();
-                DecisionTree secondLayer = new DecisionTree(tmpBoard1, score(tmpBoard1), move1, null);
-                LinkedList<Move> secondMoves = tmpBoard1.allMoves(tmpBoard1.getRedPawns());
+                DecisionTree secondLayer = new DecisionTree(score(tmpBoard1), move1);
+                LinkedList<Move> secondMoves = allMoves(tmpBoard1.getAttackOption(), tmpBoard1.getRedPawns());
                 for (Move move2 : secondMoves) {
                     Board tmpBoard2 = new Board(tmpBoard1, true);
                     tmpBoard2.possibleAction();
@@ -61,13 +60,31 @@ class Ai {
                         tmpBoard2.movePawn(pawn2, destination2.get(0));
                     }
 
-                    secondLayer.setChild(new DecisionTree(tmpBoard2, score(tmpBoard2), move2, null));
+                    secondLayer.setChild(new DecisionTree(score(tmpBoard2), move2));
                 }
                 firstLayer.setChild(secondLayer);
             }
             mainTree.setChild(firstLayer);
         }
         return mainTree;
+    }
+
+    private LinkedList<Move> allMoves(final PriorityQueue<Pawn> attackOption, final LinkedList<Pawn> pawns) {
+        LinkedList<Move> allMoves = new LinkedList<>();
+        if (attackOption.size() > 0) {
+            for (Pawn p : attackOption) {
+                for (LinkedList<Pair> move : p.getPossibleAction()) {
+                    allMoves.add(new Move(p, move));
+                }
+            }
+        } else {
+            for (Pawn pawn : pawns) {
+                for (int j = 0; j < pawn.getAmountOfActions(); j++) {
+                    allMoves.add(new Move(pawn, pawn.getPossibleAction().get(j)));
+                }
+            }
+        }
+        return allMoves;
     }
 
     private int score(Board board) {

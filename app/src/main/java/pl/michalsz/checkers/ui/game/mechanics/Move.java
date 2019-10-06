@@ -2,8 +2,6 @@ package pl.michalsz.checkers.ui.game.mechanics;
 
 import java.util.LinkedList;
 
-
-
 class Move {
 
     private Pawn pawn;
@@ -24,10 +22,6 @@ class Move {
             newDestination.add(new Pair(pair));
         }
         return newDestination;
-    }
-
-    @Override public String toString() {
-        return pawn.getCurrentPosition().getX() + " " + pawn.getCurrentPosition().getY() + ":"+ destination.toString();
     }
 }
 
