@@ -79,4 +79,6 @@ class Pawn implements Comparable<Pawn>{
 
     boolean isWhite() { return white; }
 
+
+
 }

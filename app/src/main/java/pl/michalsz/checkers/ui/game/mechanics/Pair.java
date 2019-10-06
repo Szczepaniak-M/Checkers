@@ -5,7 +5,9 @@ final class Pair {
     private int X;
     private int Y;
 
-    Pair() { set = false; }
+    Pair() {
+        set = false;
+    }
 
     Pair(int x, int y) {
         set = true;
@@ -20,20 +22,37 @@ final class Pair {
     }
 
     @Override
-    public String toString() { return X + " " + Y; }
+    public String toString() {
+        return X + " " + Y;
+    }
 
-    int getX() { return X; }
+    int getX() {
+        return X;
+    }
 
-    int getY() { return Y; }
+    int getY() {
+        return Y;
+    }
 
     void set(int x, int y) {
         set = true;
         X = x;
         Y = y;
     }
-    void unset(){ set = false; }
 
-    boolean isSet(){ return set; }
+    void set(Pair pair) {
+        set = true;
+        this.X = pair.X;
+        this.Y = pair.Y;
+    }
+
+    void unset() {
+        set = false;
+    }
+
+    boolean isSet() {
+        return set;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -43,7 +62,7 @@ final class Pair {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return ((Pair) o).X == X && ((Pair) o).Y == Y ;
+        return ((Pair) o).X == X && ((Pair) o).Y == Y;
     }
 }
 
