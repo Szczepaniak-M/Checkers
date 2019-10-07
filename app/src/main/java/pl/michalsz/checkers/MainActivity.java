@@ -1,10 +1,8 @@
 package pl.michalsz.checkers;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.GestureDetector;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,21 +15,16 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.drawerlayout.widget.DrawerLayout;
 
-
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends FragmentActivity implements NavController.OnDestinationChangedListener {
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
-    private Context context;
     private GestureDetector detector;
     private Handler handler;
-    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +33,11 @@ public class MainActivity extends FragmentActivity implements NavController.OnDe
         handler = new Handler();
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        context = this;
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         navController.addOnDestinationChangedListener(this);
         NavigationUI.setupWithNavController(navigationView, navController);
-        setNavigationViewAction();
         setGestureDetector();
+
     }
 
     @Override
@@ -59,7 +51,6 @@ public class MainActivity extends FragmentActivity implements NavController.OnDe
                                      @NonNull NavDestination destination, @Nullable Bundle arguments) {
         if (destination.getId() == R.id.nav_game) {
             navigationView.getMenu().findItem(R.id.nav_game_option).setVisible(true);
-
         } else {
             navigationView.getMenu().findItem(R.id.nav_game_option).setVisible(false);
         }
@@ -80,30 +71,6 @@ public class MainActivity extends FragmentActivity implements NavController.OnDe
         } else {
             super.onBackPressed();
         }
-    }
-
-    private void setNavigationViewAction() {
-        navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_computer).
-                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return false;
-                    }
-                });
-        navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_player).
-                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return false;
-                    }
-                });
-        navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_replay).
-                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return false;
-                    }
-                });
     }
 
     private void setGestureDetector() {
@@ -134,9 +101,7 @@ public class MainActivity extends FragmentActivity implements NavController.OnDe
                 }
                 return false;
             }
-
         });
-
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -163,7 +128,6 @@ public class MainActivity extends FragmentActivity implements NavController.OnDe
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
-
 }
 
 

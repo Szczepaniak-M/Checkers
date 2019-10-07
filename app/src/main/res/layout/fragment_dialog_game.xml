@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="140dp"
+        android:layout_height="200dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:text=" "
+            android:text="@string/white_win"
             android:textColor="#000000"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,14 +33,14 @@
             android:text="@string/once_again"
             android:textColor="#000000"
             android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="@+id/action_exit"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/heading_game_alert" />
 
         <TextView
             android:id="@+id/action_computer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="20dp"
             android:text="@string/computer"
             android:textColor="#33bbff"
             android:textSize="25sp"
@@ -51,27 +51,22 @@
             android:id="@+id/action_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="52dp"
             android:text="@string/player"
             android:textColor="#33bbff"
             android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/heading_game_alert"
+            app:layout_constraintStart_toEndOf="@+id/action_exit"
             app:layout_constraintTop_toBottomOf="@+id/heading_game_alert" />
 
         <TextView
             android:id="@+id/action_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="65dp"
             android:text="@string/exit"
             android:textColor="#33bbff"
             android:textSize="25sp"
-            app:layout_constraintEnd_toStartOf="@+id/action_player"
-            app:layout_constraintHorizontal_bias="0.421"
-            app:layout_constraintStart_toStartOf="@+id/heading_game_alert"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/action_player" />
 
 

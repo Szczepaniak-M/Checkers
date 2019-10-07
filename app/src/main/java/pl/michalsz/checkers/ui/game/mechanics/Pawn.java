@@ -3,7 +3,7 @@ package pl.michalsz.checkers.ui.game.mechanics;
 import java.util.Collections;
 import java.util.LinkedList;
 
-class Pawn implements Comparable<Pawn>{
+public class Pawn implements Comparable<Pawn>{
     private boolean king;
     private boolean white;
     private int amountOfActions;

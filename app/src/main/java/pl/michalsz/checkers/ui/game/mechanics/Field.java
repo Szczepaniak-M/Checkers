@@ -58,7 +58,7 @@ class Field implements ImageView.OnClickListener {
     }
 
     void setHighlight(final Activity activity, int id) {
-        Drawable highlight = activity.getResources().getDrawable(id);
+        Drawable highlight = activity.getDrawable(id);
         image.setBackground(highlight);
     }
 
@@ -230,6 +230,5 @@ class Field implements ImageView.OnClickListener {
                 this.setImage(board.isWhiteTurn(), pawn.isKing());
             }
         }
-
     }
 }

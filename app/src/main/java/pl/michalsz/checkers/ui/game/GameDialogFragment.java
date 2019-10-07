@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import pl.michalsz.checkers.R;
 
 public class GameDialogFragment extends DialogFragment {
-    NavController navController;
+    private NavController navController;
 
     @Nullable
     @Override
@@ -35,7 +35,6 @@ public class GameDialogFragment extends DialogFragment {
         } else {
             txtHeader.setText(R.string.draw);
         }
-
 
         txtComputer.setOnClickListener(new View.OnClickListener() {
             @Override
