@@ -578,6 +578,10 @@ public class Board {
     private void actionAI() {
         Ai computer = new Ai(this);
         Move move = computer.getMove();
+        actionAI(move);
+    }
+
+    void actionAI(Move move) {
         if (move.getDestination().size() > 1) {
             attackAI(move.getPawn(), move.getDestination());
         } else {
@@ -585,7 +589,7 @@ public class Board {
         }
     }
 
-    void attackAI(Pawn pawn, LinkedList<Pair> listOfDestination) {
+    private void attackAI(Pawn pawn, LinkedList<Pair> listOfDestination) {
         Pair destination;
         listOfDestination.remove();
         while (listOfDestination.size() > 0) {
