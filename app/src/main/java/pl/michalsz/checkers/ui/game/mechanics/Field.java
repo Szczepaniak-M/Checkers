@@ -26,7 +26,7 @@ class Field implements ImageView.OnClickListener {
     }
 
     Field(Field oldField, Board newBoard) {
-        this.board = newBoard; //TODO tu moze byc problem z AI
+        this.board = newBoard;
         position = new Pair(oldField.position);
         image = null;
         if (oldField.pawn != null) {

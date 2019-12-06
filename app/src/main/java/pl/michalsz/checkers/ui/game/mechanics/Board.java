@@ -52,8 +52,8 @@ public class Board {
     Board(Board oldBoard, boolean isCopy) {
         whiteTurn = oldBoard.whiteTurn;
         chosenField = new Pair();
-        drawWhite = 0;
-        drawRed = 0;
+        drawWhite = oldBoard.drawWhite;
+        drawRed = oldBoard.drawRed;
         this.isCopy = isCopy;
         this.activity = null;
         for (int i = 0; i < 8; i++) {

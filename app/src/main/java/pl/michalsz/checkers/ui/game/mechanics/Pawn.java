@@ -23,8 +23,8 @@ public class Pawn implements Comparable<Pawn>{
         king = oldPawn.king;
         amountOfActions = oldPawn.amountOfActions;
         currentPosition = new Pair(oldPawn.currentPosition.getX(), oldPawn.currentPosition.getY());
-        for(int i = 0; i < oldPawn.possibleAction.size(); i++)
-            possibleAction.add(new LinkedList<>(oldPawn.possibleAction.get(i)));
+        for(LinkedList<Pair> action:oldPawn.possibleAction)
+            possibleAction.add(new LinkedList<>(action));
     }
 
     Pair getCurrentPosition() {
