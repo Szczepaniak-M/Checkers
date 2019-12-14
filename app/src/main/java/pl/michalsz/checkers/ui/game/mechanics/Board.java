@@ -15,7 +15,7 @@ import pl.michalsz.checkers.ui.game.GameFragmentDirections;
 
 
 public class Board {
-    private boolean whiteTurn;
+
     private Pair chosenField;
     private Field[][] board = new Field[8][8];
     private Activity activity;
@@ -25,6 +25,7 @@ public class Board {
     private Queue<Pair> highlightsFields;
     private int drawWhite;
     private int drawRed;
+    private boolean whiteTurn;
     private boolean isCopy;
     private boolean whitePlayer;
     private boolean redPlayer;
@@ -96,12 +97,12 @@ public class Board {
         return attackOption;
     }
 
-    int getDrawRed() {
-        return drawRed;
-    }
-
     int getDrawWhite() {
         return drawWhite;
+    }
+
+    int getDrawRed() {
+        return drawRed;
     }
 
     void addDrawWhite() {
