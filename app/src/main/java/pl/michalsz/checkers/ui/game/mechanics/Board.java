@@ -105,6 +105,10 @@ public class Board {
         return drawRed;
     }
 
+    boolean isWhiteTurn() {
+        return whiteTurn;
+    }
+
     void addDrawWhite() {
         drawWhite++;
     }
@@ -127,10 +131,6 @@ public class Board {
 
     void deleteAttackOption() {
         attackOption.clear();
-    }
-
-    boolean isWhiteTurn() {
-        return whiteTurn;
     }
 
     void setHighlight(Field field, int id) {
