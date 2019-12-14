@@ -19,8 +19,7 @@ public class AboutFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         container.removeAllViews();
-        View view = inflater.inflate(R.layout.fragment_about, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_about, container, false);
     }
 
 }
