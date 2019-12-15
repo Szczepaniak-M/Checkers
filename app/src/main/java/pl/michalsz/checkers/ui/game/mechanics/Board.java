@@ -189,6 +189,10 @@ public class Board {
         if( ((whiteTurn && !whitePlayer)
                 || (!whiteTurn && !redPlayer)) && !isCopy) {
             actionAI();
+            whiteTurn = !whiteTurn;
+            attackOption.clear();
+            possibleAction();
+            chosenField.unset();
         }
     }
 
