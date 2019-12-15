@@ -161,7 +161,7 @@ public class Board {
     }
 
     public void start() {
-        whiteTurn = true;
+        whiteTurn = false;
         for (int i = 0; i < 4; i++) {
             board[2 * i][0].setPawn(2 * i, 0, true, R.mipmap.white_man);
             board[2 * i + 1][1].setPawn(2 * i + 1, 1, true, R.mipmap.white_man);
@@ -176,7 +176,7 @@ public class Board {
             redPawns.add(board[2 * i][6].getPawn());
             redPawns.add(board[2 * i + 1][7].getPawn());
         }
-        possibleAction();
+        changeTurn();
 
     }
 

@@ -9,7 +9,7 @@ class Ai {
     private Move move;
 
     Ai(Board board) {
-        Board copyBoard = new Board(board, true); //zobaczc czy dizala poprawnie po refactorze
+        Board copyBoard = new Board(board, true);
         DecisionTree decisionTree = makeDecisionTree(copyBoard);
         move = selectMove(decisionTree);
     }
@@ -20,16 +20,29 @@ class Ai {
 
     private DecisionTree makeDecisionTree(Board startBoard) {
         startBoard.possibleAction();
-        LinkedList<Move> firstMoves = allMoves(startBoard.getAttackOption(), startBoard.getRedPawns());
+        LinkedList<Move> firstMoves;
+        if (startBoard.isWhiteTurn())
+            firstMoves = allMoves(startBoard.getAttackOption(), startBoard.getWhitePawns());
+        else
+            firstMoves = allMoves(startBoard.getAttackOption(), startBoard.getRedPawns());
         DecisionTree mainTree = new DecisionTree(score(startBoard), null);
+        System.out.println("XDDDDDDDDDDDDDDDDDD");
         for (Move firstMove : firstMoves) {
             Board firstMoveBoard = makeBoardAfterMove(startBoard, firstMove, true);
             DecisionTree firstLayer = new DecisionTree(score(firstMoveBoard), firstMove);
-            LinkedList<Move> secondMoves = allMoves(firstMoveBoard.getAttackOption(), firstMoveBoard.getWhitePawns());
+            LinkedList<Move> secondMoves;
+            if (startBoard.isWhiteTurn())
+                secondMoves = allMoves(firstMoveBoard.getAttackOption(), firstMoveBoard.getRedPawns());
+            else
+                secondMoves = allMoves(firstMoveBoard.getAttackOption(), firstMoveBoard.getWhitePawns());
             for (Move secondMove : secondMoves) {
                 Board secondMoveBoard = makeBoardAfterMove(firstMoveBoard, secondMove, true);
                 DecisionTree secondLayer = new DecisionTree(score(secondMoveBoard), secondMove);
-                LinkedList<Move> thirdMoves = allMoves(secondMoveBoard.getAttackOption(), secondMoveBoard.getRedPawns());
+                LinkedList<Move> thirdMoves;
+                if (startBoard.isWhiteTurn())
+                    thirdMoves = allMoves(secondMoveBoard.getAttackOption(), secondMoveBoard.getWhitePawns());
+                else
+                    thirdMoves = allMoves(secondMoveBoard.getAttackOption(), secondMoveBoard.getRedPawns());
                 for (Move thirdMove : thirdMoves) {
                     Board thirdMoveBoard = makeBoardAfterMove(secondMoveBoard, thirdMove, false);
                     secondLayer.setChild(new DecisionTree(score(thirdMoveBoard), thirdMove));
