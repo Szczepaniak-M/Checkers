@@ -11,16 +11,15 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.navigation.NavigationView;
 
 import pl.michalsz.checkers.R;
 import pl.michalsz.checkers.ui.game.mechanics.Board;
 
+
 public class GameFragment extends Fragment {
 
-    private GameViewModel gameViewModel;
     private ImageView[][] boardUI;
     private Board boardMechanics;
     private NavigationView navigationView;
@@ -28,8 +27,9 @@ public class GameFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        gameViewModel =
-                ViewModelProviders.of(this).get(GameViewModel.class);
+
+        boolean whitePlayer = GameFragmentArgs.fromBundle(getArguments()).getWhite();
+        boolean redPlayer = GameFragmentArgs.fromBundle(getArguments()).getRed();
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         container.removeAllViews();
         boardUI = new ImageView[8][8];
@@ -58,7 +58,7 @@ public class GameFragment extends Fragment {
         }
         navigationView = getActivity().findViewById(R.id.nav_view);
         setNavigationViewAction();
-        boardMechanics = new Board(boardUI, getActivity());
+        boardMechanics = new Board(boardUI, getActivity(), whitePlayer, redPlayer);
         return view;
     }
 

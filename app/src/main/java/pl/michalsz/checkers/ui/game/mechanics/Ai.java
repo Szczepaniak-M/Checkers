@@ -24,7 +24,7 @@ class Ai {
         DecisionTree mainTree = new DecisionTree(score(startBoard), null);
         for (Move firstMove : firstMoves) {
             Board firstMoveBoard = makeBoardAfterMove(startBoard, firstMove, true);
-            DecisionTree firstLayer = new DecisionTree(score(firstMoveBoard), move);
+            DecisionTree firstLayer = new DecisionTree(score(firstMoveBoard), firstMove);
             LinkedList<Move> secondMoves = allMoves(firstMoveBoard.getAttackOption(), firstMoveBoard.getWhitePawns());
             for (Move secondMove : secondMoves) {
                 Board secondMoveBoard = makeBoardAfterMove(firstMoveBoard, secondMove, true);
@@ -118,6 +118,7 @@ class Ai {
                 selectedMove = firstLayer.getMove();
             }
         }
+
         return selectedMove;
     }
 

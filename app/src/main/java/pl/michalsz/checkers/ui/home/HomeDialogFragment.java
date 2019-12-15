@@ -32,7 +32,7 @@ public class HomeDialogFragment extends DialogFragment {
             public void onClick(View v) {
                 HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action =  HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
                 action.setRed(true);
-                action.setRed(false);
+                action.setWhite(false);
                 navController.navigate(action);
             }
         });
@@ -42,7 +42,7 @@ public class HomeDialogFragment extends DialogFragment {
             public void onClick(View v) {
                 HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action =  HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
                 action.setRed(false);
-                action.setRed(true);
+                action.setWhite(true);
                 navController.navigate(action);
             }
         });
