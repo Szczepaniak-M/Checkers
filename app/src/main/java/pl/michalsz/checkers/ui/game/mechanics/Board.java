@@ -592,6 +592,7 @@ public class Board {
     }
 
     private void actionAI() {
+        //todo sleep
         Ai computer = new Ai(this);
         Move move = computer.getMove();
         actionAI(move);
@@ -609,6 +610,7 @@ public class Board {
         Pair destination;
         listOfDestination.remove();
         while (listOfDestination.size() > 0) {
+            //todo dodac sleep
             destination = listOfDestination.poll();
             attackWithPawn(pawn, destination);
             pawn.setCurrentPosition(destination);

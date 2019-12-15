@@ -75,14 +75,14 @@ public class GameFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         return false;
                     }
-                });
+                }); //todo change
         navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_player).
                 setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         return false;
                     }
-                });
+                });//todo change
         navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_replay).
                 setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
