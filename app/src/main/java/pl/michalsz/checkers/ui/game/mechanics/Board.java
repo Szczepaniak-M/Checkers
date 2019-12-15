@@ -296,7 +296,7 @@ public class Board {
                 }
             }
         }
-        if (!isMove) {
+        if (!isMove && !isCopy) {
             if (whiteTurn) {
                 end(-1);
             } else {
@@ -323,7 +323,7 @@ public class Board {
                 pawn.setPossibleActionEmpty();
             }
         }
-        if (empty) {
+        if (empty && !isCopy) {
             if (whiteTurn) {
                 end(-1);
             } else {
