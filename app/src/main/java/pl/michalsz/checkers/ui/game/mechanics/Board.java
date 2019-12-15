@@ -31,8 +31,10 @@ public class Board {
     private boolean redPlayer;
 
 
-    public Board(ImageView[][] boardMain, Activity activity) {
+    public Board(ImageView[][] boardMain, Activity activity, boolean whitePlayer, boolean redPlayer) {
         isCopy = false;
+        this.whitePlayer = whitePlayer;
+        this.redPlayer = redPlayer;
         chosenField = new Pair();
         this.activity = activity;
         redPawns = new LinkedList<>();
@@ -63,12 +65,21 @@ public class Board {
                     board[i][j] = new Field(oldBoard.board[i][j], this);
             }
         }
-        for (Pawn pawn : oldBoard.whitePawns) {
-            whitePawns.add(new Pawn(pawn));
+        whitePawns = new LinkedList<>();
+        redPawns = new LinkedList<>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (i % 2 == j % 2 && board[i][j].getPawn() != null) {
+                    if (board[i][j].getPawn().isWhite())
+                    {
+                        whitePawns.add(board[i][j].getPawn());
+                    } else {
+                        redPawns.add(board[i][j].getPawn());
+                    }
+                }
+            }
         }
-        for (Pawn pawn : oldBoard.redPawns) {
-            redPawns.add(new Pawn(pawn));
-        }
+
         attackOption = new PriorityQueue<>();
         highlightsFields = new LinkedList<>();
     }
@@ -175,15 +186,15 @@ public class Board {
         attackOption.clear();
         possibleAction();
         chosenField.unset();
-        if ((whiteTurn && whitePlayer)
-                || (!whiteTurn && redPlayer)) {
+        if( ((whiteTurn && !whitePlayer)
+                || (!whiteTurn && !redPlayer)) && !isCopy) {
             actionAI();
         }
     }
 
     void end(final int result) {
         NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
-        if(navController.getCurrentDestination().getId() == R.id.nav_game) {
+        if (navController.getCurrentDestination().getId() == R.id.nav_game) {
             GameFragmentDirections.ActionNavGameToNavGameAlert action = GameFragmentDirections.actionNavGameToNavGameAlert();
             action.setWinner(result);
             navController.navigate(action);

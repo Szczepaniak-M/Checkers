@@ -118,6 +118,7 @@ class Ai {
                 selectedMove = firstLayer.getMove();
             }
         }
+
         return selectedMove;
     }
 
