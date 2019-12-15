@@ -26,7 +26,6 @@ class Ai {
         else
             firstMoves = allMoves(startBoard.getAttackOption(), startBoard.getRedPawns());
         DecisionTree mainTree = new DecisionTree(score(startBoard), null);
-        System.out.println("XDDDDDDDDDDDDDDDDDD");
         for (Move firstMove : firstMoves) {
             Board firstMoveBoard = makeBoardAfterMove(startBoard, firstMove, true);
             DecisionTree firstLayer = new DecisionTree(score(firstMoveBoard), firstMove);
