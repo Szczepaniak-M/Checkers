@@ -27,14 +27,14 @@ public class Board {
     private int drawRed;
     private boolean whiteTurn;
     private boolean isCopy;
-    private boolean whitePlayer;
-    private boolean redPlayer;
+    private boolean isWhitePlayer;
+    private boolean isRedPlayer;
 
 
     public Board(ImageView[][] boardMain, Activity activity, boolean whitePlayer, boolean redPlayer) {
         isCopy = false;
-        this.whitePlayer = whitePlayer;
-        this.redPlayer = redPlayer;
+        this.isWhitePlayer = whitePlayer;
+        this.isRedPlayer = redPlayer;
         chosenField = new Pair();
         this.activity = activity;
         redPawns = new LinkedList<>();
@@ -121,11 +121,15 @@ public class Board {
     }
 
     boolean isWhitePlayer() {
-        return whitePlayer;
+        return isWhitePlayer;
     }
 
     boolean isRedPlayer(){
-        return redPlayer;
+        return isRedPlayer;
+    }
+
+    boolean isCopy(){
+        return isCopy;
     }
 
     void addDrawWhite() {
@@ -194,8 +198,8 @@ public class Board {
         attackOption.clear();
         possibleAction();
         chosenField.unset();
-        if( ((whiteTurn && !whitePlayer)
-                || (!whiteTurn && !redPlayer)) && !isCopy) {
+        if( ((whiteTurn && !isWhitePlayer)
+                || (!whiteTurn && !isRedPlayer)) && !isCopy) {
             actionAI();
             whiteTurn = !whiteTurn;
             attackOption.clear();
@@ -610,6 +614,8 @@ public class Board {
         if (move.getDestination().size() > 1) {
             update = attackAI(move.getPawn(), move.getDestination());
         } else {
+            if(!isCopy)
+                Field.addLatency();
             update = movePawn(move.getPawn(), move.getDestination().get(0));
         }
         board[update.getX()][update.getY()].levelUp();
@@ -620,6 +626,8 @@ public class Board {
         Pair destination = null;
         listOfDestination.remove();
         while (listOfDestination.size() > 0) {
+            if(!isCopy)
+                Field.addLatency();
             destination = listOfDestination.poll();
             attackWithPawn(pawn, destination);
             pawn.setCurrentPosition(destination);

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+
 import pl.michalsz.checkers.R;
 
 class Field implements ImageView.OnClickListener {
@@ -18,7 +19,8 @@ class Field implements ImageView.OnClickListener {
     private Pair position;
     private Pawn pawn;
     private Handler handler = new Handler();
-    private static int latency;
+    private static int FullLatency;
+    private static int singleLatency = 300;
 
     Field(Board board, int x, int y, ImageView img) {
         this.board = board;
@@ -37,6 +39,10 @@ class Field implements ImageView.OnClickListener {
         } else {
             pawn = null;
         }
+    }
+
+    static void addLatency() {
+        FullLatency += singleLatency;
     }
 
     Pair getPosition() {
@@ -66,23 +72,26 @@ class Field implements ImageView.OnClickListener {
     }
 
     void setImage(boolean white, boolean king) {
-
-
         if (white) {
+            System.out.println(FullLatency);
             if (king) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.white_king);
+                        if (!board.isCopy())
+                            FullLatency -= singleLatency;
                     }
-                }, latency);
+                }, FullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.white_man);
+                        if (!board.isCopy())
+                            FullLatency -= singleLatency;
                     }
-                }, latency);
+                }, FullLatency);
 
             }
         } else {
@@ -91,40 +100,39 @@ class Field implements ImageView.OnClickListener {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.red_king);
+                        if (!board.isCopy())
+                            FullLatency -= singleLatency;
                         if(board.isRedPlayer() && board.isWhitePlayer())
                             image.setRotation(180);
                     }
-                }, latency);
+                }, FullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.red_man);
+                        if (!board.isCopy())
+                            FullLatency -= singleLatency;
                     }
-                }, latency);
+                }, FullLatency);
             }
         }
     }
 
     void deleteHighlightField() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                image.setBackground(null);
-            }
-        }, latency);
-
+            image.setBackground(null);
     }
 
     void deletePawn() {
         pawn = null;
         if (image != null) {
+            System.out.println(FullLatency);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     image.setImageResource(R.mipmap.empty);
                 }
-            }, latency);
+            }, FullLatency);
         }
     }
     @Override
