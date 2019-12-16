@@ -507,7 +507,7 @@ public class Board {
         }
     }
 
-    void movePawn(Pawn pawn, Pair destination) {
+    Pair movePawn(Pawn pawn, Pair destination) {
         int x = pawn.getCurrentPosition().getX();
         int y = pawn.getCurrentPosition().getY();
         int dstX = destination.getX();
@@ -519,6 +519,7 @@ public class Board {
         }
         deleteHighlightBoard();
         board[x][y].deletePawn();
+        return destination;
     }
 
     void attackWithPawn(Pawn pawn, Pair destination) {
@@ -597,21 +598,25 @@ public class Board {
     }
 
     void actionAI(Move move) {
+        Pair update;
         if (move.getDestination().size() > 1) {
-            attackAI(move.getPawn(), move.getDestination());
+            update = attackAI(move.getPawn(), move.getDestination());
+
         } else {
-            movePawn(move.getPawn(), move.getDestination().get(0));
+            update = movePawn(move.getPawn(), move.getDestination().get(0));
         }
-        board[move.getPawn().getCurrentPosition().getX()][move.getPawn().getCurrentPosition().getY()].levelUp();
+        board[update.getX()][update.getY()].levelUp();
+
     }
 
-    private void attackAI(Pawn pawn, LinkedList<Pair> listOfDestination) {
-        Pair destination;
+    private Pair attackAI(Pawn pawn, LinkedList<Pair> listOfDestination) {
+        Pair destination = null;
         listOfDestination.remove();
         while (listOfDestination.size() > 0) {
             destination = listOfDestination.poll();
             attackWithPawn(pawn, destination);
             pawn.setCurrentPosition(destination);
         }
+        return destination;
     }
 }
