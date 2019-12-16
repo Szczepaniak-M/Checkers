@@ -91,6 +91,8 @@ class Field implements ImageView.OnClickListener {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.red_king);
+                        if(board.isRedPlayer() && board.isWhitePlayer())
+                            image.setRotation(180);
                     }
                 }, latency);
             } else {

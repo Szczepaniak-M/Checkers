@@ -120,6 +120,14 @@ public class Board {
         return whiteTurn;
     }
 
+    boolean isWhitePlayer() {
+        return whitePlayer;
+    }
+
+    boolean isRedPlayer(){
+        return redPlayer;
+    }
+
     void addDrawWhite() {
         drawWhite++;
     }
@@ -601,7 +609,6 @@ public class Board {
         Pair update;
         if (move.getDestination().size() > 1) {
             update = attackAI(move.getPawn(), move.getDestination());
-
         } else {
             update = movePawn(move.getPawn(), move.getDestination().get(0));
         }
