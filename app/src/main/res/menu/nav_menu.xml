@@ -28,10 +28,13 @@
         android:id="@+id/nav_game_option">
         <menu>
             <item
+                android:id="@+id/nav_new_game"
+                android:icon="@drawable/ic_play"
+                android:title="@string/menu_new_game" />
+            <item
                 android:id="@+id/nav_replay"
                 android:icon="@drawable/ic_replay"
                 android:title="@string/menu_replay" />
-
         </menu>
     </item>
 

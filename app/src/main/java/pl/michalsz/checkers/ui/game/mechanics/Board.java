@@ -1,15 +1,11 @@
 package pl.michalsz.checkers.ui.game.mechanics;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.widget.CalendarView;
 import android.widget.ImageView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;

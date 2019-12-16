@@ -16,6 +16,7 @@ class Field implements ImageView.OnClickListener {
     private ImageView image;
     private Pair position;
     private Pawn pawn;
+    private static int latency;
 
     Field(Board board, int x, int y, ImageView img) {
         this.board = board;

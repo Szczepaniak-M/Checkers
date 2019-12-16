@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -24,7 +26,6 @@ public class GameFragment extends Fragment {
     private ImageView[][] boardUI;
     private Board boardMechanics;
     private NavigationView navigationView;
-    private static boolean end = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +77,22 @@ public class GameFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         boardMechanics.clean();
                         boardMechanics.start();
+                        DrawerLayout mDrawerLayout = getActivity().findViewById(R.id.drawer_layout);
+                        mDrawerLayout.closeDrawers();
+                        return false;
+                    }
+                });
+        navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_new_game).
+                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+                        if (navController.getCurrentDestination().getId() == R.id.nav_game) {
+                            GameFragmentDirections.ActionNavGameToNavGameAlert action = GameFragmentDirections.actionNavGameToNavGameAlert();
+                            action.setWinner(-2);
+                            navController.navigate(action);
+                        }
                         DrawerLayout mDrawerLayout = getActivity().findViewById(R.id.drawer_layout);
                         mDrawerLayout.closeDrawers();
                         return false;

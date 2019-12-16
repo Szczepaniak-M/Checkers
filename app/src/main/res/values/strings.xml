@@ -14,6 +14,7 @@
     <string name="menu_player">Change computer to player</string>
     <string name="menu_computer">Change player to computer</string>
     <string name="menu_replay">Reset game</string>
+    <string name="menu_new_game">New game</string>
     <string name="btn_player">Play with Friend</string>
     <string name="btn_computer">Play with Computer</string>
     <string name="field">Field</string>
@@ -54,6 +55,7 @@
     <string name="draw">DRAW</string>
     <string name="red_win">The RED player is winner</string>
     <string name="white_win">The WHITE player is winner</string>
+    <string name="new_game">New Game</string>
     <string name="exit">EXIT</string>
     <string name="player">Player</string>
     <string name="computer">Computer</string>
