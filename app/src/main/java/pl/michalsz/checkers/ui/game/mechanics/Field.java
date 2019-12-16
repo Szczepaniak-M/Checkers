@@ -2,6 +2,7 @@ package pl.michalsz.checkers.ui.game.mechanics;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +17,7 @@ class Field implements ImageView.OnClickListener {
     private ImageView image;
     private Pair position;
     private Pawn pawn;
+    private Handler handler = new Handler();
     private static int latency;
 
     Field(Board board, int x, int y, ImageView img) {
@@ -64,32 +66,65 @@ class Field implements ImageView.OnClickListener {
     }
 
     void setImage(boolean white, boolean king) {
+
+
         if (white) {
             if (king) {
-                image.setImageResource(R.mipmap.white_king);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.mipmap.white_king);
+                    }
+                }, latency);
             } else {
-                image.setImageResource(R.mipmap.white_man);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.mipmap.white_man);
+                    }
+                }, latency);
+
             }
         } else {
             if (king) {
-                image.setImageResource(R.mipmap.red_king);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.mipmap.red_king);
+                    }
+                }, latency);
             } else {
-                image.setImageResource(R.mipmap.red_man);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.mipmap.red_man);
+                    }
+                }, latency);
             }
         }
     }
 
     void deleteHighlightField() {
-        image.setBackground(null);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                image.setBackground(null);
+            }
+        }, latency);
+
     }
 
     void deletePawn() {
         pawn = null;
         if (image != null) {
-            image.setImageResource(R.mipmap.empty);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    image.setImageResource(R.mipmap.empty);
+                }
+            }, latency);
         }
     }
-
     @Override
     public void onClick(View v) {
         Pair chosenField = board.getChosenField();
@@ -133,6 +168,7 @@ class Field implements ImageView.OnClickListener {
         for (LinkedList<Pair> field : chosenPawn.getPossibleAction()) {
             if (field.getFirst().equals(position)) {
                 board.movePawn(chosenPawn, position);
+                this.levelUp();
                 if (chosenPawn.isKing()) {
                     if (board.isWhiteTurn()) {
                         board.addDrawWhite();
