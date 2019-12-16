@@ -53,11 +53,12 @@
     <string name="red">Red</string>
     <string name="white">White</string>
     <string name="draw">DRAW</string>
-    <string name="red_win">The RED player is winner</string>
-    <string name="white_win">The WHITE player is winner</string>
+    <string name="red_win">The RED pawns won</string>
+    <string name="white_win">The WHITE pawns won</string>
     <string name="new_game">New Game</string>
     <string name="exit">EXIT</string>
     <string name="player">Player</string>
     <string name="computer">Computer</string>
-    <string name="once_again">I want to play once again with:  </string>
+    <string name="once_again">I want to play once again with:</string>
+    <string name="tab">\\t</string>
 </resources>
