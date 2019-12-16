@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
@@ -69,26 +70,14 @@ public class GameFragment extends Fragment {
     }
 
     private void setNavigationViewAction() {
-        navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_computer).
-                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return false;
-                    }
-                }); //todo change
-        navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_player).
-                setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return false;
-                    }
-                });//todo change
         navigationView.getMenu().findItem(R.id.nav_game_option).getSubMenu().findItem(R.id.nav_replay).
                 setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         boardMechanics.clean();
                         boardMechanics.start();
+                        DrawerLayout mDrawerLayout = getActivity().findViewById(R.id.drawer_layout);
+                        mDrawerLayout.closeDrawers();
                         return false;
                     }
                 });

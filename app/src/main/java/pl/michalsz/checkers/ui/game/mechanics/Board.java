@@ -523,7 +523,6 @@ public class Board {
         }
         deleteHighlightBoard();
         board[x][y].deletePawn();
-        board[dstX][dstY].levelUp();
     }
 
     void attackWithPawn(Pawn pawn, Pair destination) {
@@ -607,6 +606,7 @@ public class Board {
         } else {
             movePawn(move.getPawn(), move.getDestination().get(0));
         }
+        board[move.getPawn().getCurrentPosition().getX()][move.getPawn().getCurrentPosition().getY()].levelUp();
     }
 
     private void attackAI(Pawn pawn, LinkedList<Pair> listOfDestination) {
@@ -617,6 +617,5 @@ public class Board {
             attackWithPawn(pawn, destination);
             pawn.setCurrentPosition(destination);
         }
-        board[pawn.getCurrentPosition().getX()][pawn.getCurrentPosition().getY()].levelUp();
     }
 }

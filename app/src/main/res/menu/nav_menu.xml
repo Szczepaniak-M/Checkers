@@ -28,15 +28,6 @@
         android:id="@+id/nav_game_option">
         <menu>
             <item
-                android:id="@+id/nav_computer"
-                android:icon="@drawable/ic_computer"
-                android:title="@string/menu_computer" />
-
-            <item
-                android:id="@+id/nav_player"
-                android:icon="@drawable/ic_player"
-                android:title="@string/menu_player" />
-            <item
                 android:id="@+id/nav_replay"
                 android:icon="@drawable/ic_replay"
                 android:title="@string/menu_replay" />
