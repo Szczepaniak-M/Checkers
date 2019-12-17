@@ -19,8 +19,8 @@ class Field implements ImageView.OnClickListener {
     private Pair position;
     private Pawn pawn;
     private Handler handler = new Handler();
-    private static int FullLatency;
-    private static int singleLatency = 300;
+    private static int fullLatency;
+    private static int singleLatency = 400;
 
     Field(Board board, int x, int y, ImageView img) {
         this.board = board;
@@ -42,7 +42,7 @@ class Field implements ImageView.OnClickListener {
     }
 
     static void addLatency() {
-        FullLatency += singleLatency;
+        fullLatency += singleLatency;
     }
 
     Pair getPosition() {
@@ -72,26 +72,26 @@ class Field implements ImageView.OnClickListener {
     }
 
     void setImage(boolean white, boolean king) {
+        System.out.println("setImage"+fullLatency);
         if (white) {
-            System.out.println(FullLatency);
             if (king) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.white_king);
-                        if (!board.isCopy())
-                            FullLatency -= singleLatency;
+                        if((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
                     }
-                }, FullLatency);
+                }, fullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.white_man);
-                        if (!board.isCopy())
-                            FullLatency -= singleLatency;
+                        if((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
                     }
-                }, FullLatency);
+                }, fullLatency);
 
             }
         } else {
@@ -100,55 +100,59 @@ class Field implements ImageView.OnClickListener {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.red_king);
-                        if (!board.isCopy())
-                            FullLatency -= singleLatency;
-                        if(board.isRedPlayer() && board.isWhitePlayer())
+                        if((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
+                        if (board.isRedPlayer() && board.isWhitePlayer())
                             image.setRotation(180);
                     }
-                }, FullLatency);
+                }, fullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         image.setImageResource(R.mipmap.red_man);
-                        if (!board.isCopy())
-                            FullLatency -= singleLatency;
+                        if((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
                     }
-                }, FullLatency);
+                }, fullLatency);
             }
         }
     }
 
     void deleteHighlightField() {
-            image.setBackground(null);
+        image.setBackground(null);
     }
 
     void deletePawn() {
         pawn = null;
         if (image != null) {
-            System.out.println(FullLatency);
+            System.out.println("DeletePawn"+fullLatency);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     image.setImageResource(R.mipmap.empty);
                 }
-            }, FullLatency);
+            }, fullLatency);
         }
     }
+
     @Override
     public void onClick(View v) {
-        Pair chosenField = board.getChosenField();
-        if (board.getAttackOption().size() > 0) {
-            if (pawn != null) {
-                attackFirstClick(chosenField);
-            } else if (chosenField.isSet()) {
-                attackSecondClick(chosenField);
-            }
-        } else {
-            if (pawn != null) {
-                moveFirstClick(chosenField);
-            } else if (board.getChosenField().isSet()) {
-                moveSecondClick(chosenField);
+        System.out.println("OnClick" + fullLatency);
+        if (fullLatency == 0) {
+            Pair chosenField = board.getChosenField();
+            if (board.getAttackOption().size() > 0) {
+                if (pawn != null) {
+                    attackFirstClick(chosenField);
+                } else if (chosenField.isSet()) {
+                    attackSecondClick(chosenField);
+                }
+            } else {
+                if (pawn != null) {
+                    moveFirstClick(chosenField);
+                } else if (board.getChosenField().isSet()) {
+                    moveSecondClick(chosenField);
+                }
             }
         }
     }
