@@ -174,6 +174,7 @@ public class Board {
 
     public void start() {
         whiteTurn = false;
+        Field.resetLatency();
         for (int i = 0; i < 4; i++) {
             board[2 * i][0].setPawn(2 * i, 0, true, R.mipmap.white_man);
             board[2 * i + 1][1].setPawn(2 * i + 1, 1, true, R.mipmap.white_man);
@@ -231,6 +232,7 @@ public class Board {
         deleteHighlightBoard();
         drawWhite = 0;
         drawRed = 0;
+        Field.resetLatency();
     }
 
     void possibleAction() {

@@ -45,6 +45,10 @@ class Field implements ImageView.OnClickListener {
         fullLatency += singleLatency;
     }
 
+    static void resetLatency(){
+        fullLatency = 0;
+    }
+
     Pair getPosition() {
         return position;
     }
