@@ -45,7 +45,7 @@ class Field implements ImageView.OnClickListener {
         fullLatency += singleLatency;
     }
 
-    static void resetLatency(){
+    static void resetLatency() {
         fullLatency = 0;
     }
 
@@ -76,52 +76,68 @@ class Field implements ImageView.OnClickListener {
     }
 
     void setImage(boolean white, boolean king) {
-        System.out.println("setImage"+fullLatency);
+        System.out.println("PrzeDsetImage" + fullLatency + getPosition());
         if (white) {
             if (king) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        image.setImageResource(R.mipmap.white_king);
-                        if((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
+                        synchronized (this) {
+                            System.out.println("Przed " + fullLatency + getPosition());
+                            image.setImageResource(R.mipmap.white_king);
+                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                                fullLatency -= singleLatency;
+                            System.out.println("PO " + fullLatency + getPosition());
+                        }
                     }
                 }, fullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        image.setImageResource(R.mipmap.white_man);
-                        if((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
+                        synchronized (this) {
+                            System.out.println("Przed " + fullLatency + getPosition());
+                            image.setImageResource(R.mipmap.white_man);
+                            if ((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
+                                fullLatency -= singleLatency;
+                            System.out.println("PO " + fullLatency + getPosition());
+                        }
                     }
                 }, fullLatency);
-
             }
         } else {
             if (king) {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        image.setImageResource(R.mipmap.red_king);
-                        if((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
-                        if (board.isRedPlayer() && board.isWhitePlayer())
-                            image.setRotation(180);
+                        synchronized (this) {
+                            System.out.println("Przed " + fullLatency + getPosition());
+                            image.setImageResource(R.mipmap.red_king);
+                            if ((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
+                                fullLatency -= singleLatency;
+                            System.out.println("PO " + fullLatency + getPosition());
+                            if (board.isRedPlayer() && board.isWhitePlayer())
+                                image.setRotation(180);
+                        }
                     }
                 }, fullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        image.setImageResource(R.mipmap.red_man);
-                        if((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
+                        synchronized (this) {
+                            System.out.println("Przed " + fullLatency + getPosition());
+                            image.setImageResource(R.mipmap.red_man);
+                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                                fullLatency -= singleLatency;
+                            System.out.println("PO " + fullLatency + getPosition());
+                        }
                     }
                 }, fullLatency);
             }
         }
     }
+
 
     void deleteHighlightField() {
         image.setBackground(null);
@@ -130,7 +146,6 @@ class Field implements ImageView.OnClickListener {
     void deletePawn() {
         pawn = null;
         if (image != null) {
-            System.out.println("DeletePawn"+fullLatency);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
