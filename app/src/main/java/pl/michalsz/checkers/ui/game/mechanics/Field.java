@@ -98,7 +98,7 @@ class Field implements ImageView.OnClickListener {
                         synchronized (this) {
                             System.out.println("Przed " + fullLatency + getPosition());
                             image.setImageResource(R.mipmap.white_man);
-                            if ((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
+                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
                                 fullLatency -= singleLatency;
                             System.out.println("PO " + fullLatency + getPosition());
                         }
@@ -113,7 +113,7 @@ class Field implements ImageView.OnClickListener {
                         synchronized (this) {
                             System.out.println("Przed " + fullLatency + getPosition());
                             image.setImageResource(R.mipmap.red_king);
-                            if ((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn()))
+                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
                                 fullLatency -= singleLatency;
                             System.out.println("PO " + fullLatency + getPosition());
                             if (board.isRedPlayer() && board.isWhitePlayer())
