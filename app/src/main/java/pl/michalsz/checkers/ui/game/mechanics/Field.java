@@ -79,29 +79,25 @@ class Field implements ImageView.OnClickListener {
         System.out.println("PrzeDsetImage" + fullLatency + getPosition());
         if (white) {
             if (king) {
-                handler.postDelayed(new Runnable() {
+                handler.postDelayed(new Runnable() {  //todo zastapic warunke argumentem
                     @Override
                     public void run() {
-                        synchronized (this) {
-                            System.out.println("Przed " + fullLatency + getPosition());
-                            image.setImageResource(R.mipmap.white_king);
-                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                                fullLatency -= singleLatency;
-                            System.out.println("PO " + fullLatency + getPosition());
-                        }
+                        System.out.println("Przed " + fullLatency + getPosition());
+                        image.setImageResource(R.mipmap.white_king);
+                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
+                        System.out.println("PO " + fullLatency + getPosition());
                     }
                 }, fullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        synchronized (this) {
-                            System.out.println("Przed " + fullLatency + getPosition());
-                            image.setImageResource(R.mipmap.white_man);
-                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                                fullLatency -= singleLatency;
-                            System.out.println("PO " + fullLatency + getPosition());
-                        }
+                        System.out.println("Przed " + fullLatency + getPosition());
+                        image.setImageResource(R.mipmap.white_man);
+                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
+                        System.out.println("PO " + fullLatency + getPosition());
                     }
                 }, fullLatency);
             }
@@ -110,34 +106,29 @@ class Field implements ImageView.OnClickListener {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        synchronized (this) {
-                            System.out.println("Przed " + fullLatency + getPosition());
-                            image.setImageResource(R.mipmap.red_king);
-                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                                fullLatency -= singleLatency;
-                            System.out.println("PO " + fullLatency + getPosition());
-                            if (board.isRedPlayer() && board.isWhitePlayer())
-                                image.setRotation(180);
-                        }
+                        System.out.println("Przed " + fullLatency + getPosition());
+                        image.setImageResource(R.mipmap.red_king);
+                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
+                        System.out.println("PO " + fullLatency + getPosition());
+                        if (board.isRedPlayer() && board.isWhitePlayer())
+                            image.setRotation(180);
                     }
                 }, fullLatency);
             } else {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        synchronized (this) {
-                            System.out.println("Przed " + fullLatency + getPosition());
-                            image.setImageResource(R.mipmap.red_man);
-                            if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                                fullLatency -= singleLatency;
-                            System.out.println("PO " + fullLatency + getPosition());
-                        }
+                        System.out.println("Przed " + fullLatency + getPosition());
+                        image.setImageResource(R.mipmap.red_man);
+                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                            fullLatency -= singleLatency;
+                        System.out.println("PO " + fullLatency + getPosition());
                     }
                 }, fullLatency);
             }
         }
     }
-
 
     void deleteHighlightField() {
         image.setBackground(null);
