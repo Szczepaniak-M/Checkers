@@ -92,8 +92,17 @@ class Field implements ImageView.OnClickListener {
     }
 
     void setHighlight(final Activity activity, int id) {
-        Drawable highlight = activity.getDrawable(id);
-        image.setBackground(highlight);
+        final Drawable highlight = activity.getDrawable(id);
+        if ((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn())){
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    image.setBackground(highlight);
+                }
+            }, fullLatency);
+        } else{
+            image.setBackground(highlight);
+        }
     }
 
     void setImage(boolean white, boolean king) {
@@ -276,6 +285,7 @@ class Field implements ImageView.OnClickListener {
             pawn.setKing();
             if (image != null) {
                 this.setImage(board.isWhiteTurn(), pawn.isKing());
+                addLatency();
             }
         }
     }
