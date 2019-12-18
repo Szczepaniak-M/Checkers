@@ -53,11 +53,9 @@ class Field implements ImageView.OnClickListener {
 
         @Override
         public void run() {
-            System.out.println("Przed " + fullLatency + getPosition());
             image.setImageResource(imageId);
             if(updateLatency)
                 fullLatency -= singleLatency;
-            System.out.println("Po " + fullLatency + getPosition());
         }
 
 
@@ -106,7 +104,6 @@ class Field implements ImageView.OnClickListener {
     }
 
     void setImage(boolean white, boolean king) {
-        System.out.println("PrzeDsetImage" + fullLatency + getPosition());
         boolean update = false;
         if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
              update = true;
