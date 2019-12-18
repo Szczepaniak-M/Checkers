@@ -41,6 +41,27 @@ class Field implements ImageView.OnClickListener {
         }
     }
 
+    class Task implements Runnable{
+        boolean updateLatency;
+        int imageId;
+
+        Task(boolean updateLatency, int imageId)
+        {
+            this.updateLatency = updateLatency;
+            this.imageId = imageId;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("Przed " + fullLatency + getPosition());
+            image.setImageResource(imageId);
+            if(updateLatency)
+                fullLatency -= singleLatency;
+            System.out.println("Po " + fullLatency + getPosition());
+        }
+
+
+    }
     static void addLatency() {
         fullLatency += singleLatency;
     }
@@ -77,55 +98,21 @@ class Field implements ImageView.OnClickListener {
 
     void setImage(boolean white, boolean king) {
         System.out.println("PrzeDsetImage" + fullLatency + getPosition());
+        boolean update = false;
+        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+             update = true;
         if (white) {
             if (king) {
-                handler.postDelayed(new Runnable() {  //todo zastapic warunke argumentem
-                    @Override
-                    public void run() {
-                        System.out.println("Przed " + fullLatency + getPosition());
-                        image.setImageResource(R.mipmap.white_king);
-                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
-                        System.out.println("PO " + fullLatency + getPosition());
-                    }
-                }, fullLatency);
+                handler.postDelayed(new Task(update,R.mipmap.white_king), fullLatency);
             } else {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("Przed " + fullLatency + getPosition());
-                        image.setImageResource(R.mipmap.white_man);
-                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
-                        System.out.println("PO " + fullLatency + getPosition());
-                    }
-                }, fullLatency);
+                handler.postDelayed(new Task(update,R.mipmap.white_man), fullLatency);
             }
         } else {
             if (king) {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("Przed " + fullLatency + getPosition());
-                        image.setImageResource(R.mipmap.red_king);
-                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
-                        System.out.println("PO " + fullLatency + getPosition());
-                        if (board.isRedPlayer() && board.isWhitePlayer())
-                            image.setRotation(180);
-                    }
-                }, fullLatency);
+                handler.postDelayed(new Task(update,R.mipmap.red_king), fullLatency);
+
             } else {
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println("Przed " + fullLatency + getPosition());
-                        image.setImageResource(R.mipmap.red_man);
-                        if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-                            fullLatency -= singleLatency;
-                        System.out.println("PO " + fullLatency + getPosition());
-                    }
-                }, fullLatency);
+                handler.postDelayed(new Task(update,R.mipmap.red_man), fullLatency);
             }
         }
     }
