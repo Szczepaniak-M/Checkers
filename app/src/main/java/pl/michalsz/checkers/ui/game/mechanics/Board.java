@@ -516,7 +516,7 @@ public class Board {
             x = pawn.getCurrentPosition().getX();
             y = pawn.getCurrentPosition().getY();
             if (board[x][y].getImage() != null) {
-                setHighlight(board[x][y], R.drawable.highlight_red); //todo upewnic sie ze opoznianie nie powoduje kasacji podswietlenia
+                setHighlight(board[x][y], R.drawable.highlight_red);
             }
         }
     }

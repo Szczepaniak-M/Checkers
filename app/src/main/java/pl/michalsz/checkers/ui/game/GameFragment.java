@@ -1,6 +1,7 @@
 package pl.michalsz.checkers.ui.game;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -67,7 +68,15 @@ public class GameFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        boardMechanics.start();
+        boardMechanics.clean();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                boardMechanics.start();
+            }
+        }, 20);
+
     }
 
     private void setNavigationViewAction() {
@@ -99,8 +108,4 @@ public class GameFragment extends Fragment {
                     }
                 });
     }
-
-
-
-
 }
