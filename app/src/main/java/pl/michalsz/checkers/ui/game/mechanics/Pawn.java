@@ -1,9 +1,12 @@
 package pl.michalsz.checkers.ui.game.mechanics;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class Pawn implements Comparable<Pawn>{
+public class Pawn implements Comparable<Pawn>, Parcelable {
     private boolean king;
     private boolean white;
     private int amountOfActions;
@@ -92,4 +95,38 @@ public class Pawn implements Comparable<Pawn>{
     public String toString(){
         return "Pawn: " + currentPosition.getX() + " " + currentPosition.getY() + " ";
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.king ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.white ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.amountOfActions);
+        dest.writeParcelable(this.currentPosition, flags);
+        dest.writeList(this.possibleAction);
+    }
+
+    private Pawn(Parcel in) {
+        this.king = in.readByte() != 0;
+        this.white = in.readByte() != 0;
+        this.amountOfActions = in.readInt();
+        this.currentPosition = in.readParcelable(Pair.class.getClassLoader());
+        this.possibleAction = new LinkedList<>();
+    }
+
+    public static final Parcelable.Creator<Pawn> CREATOR = new Parcelable.Creator<Pawn>() {
+        @Override
+        public Pawn createFromParcel(Parcel source) {
+            return new Pawn(source);
+        }
+
+        @Override
+        public Pawn[] newArray(int size) {
+            return new Pawn[size];
+        }
+    };
 }

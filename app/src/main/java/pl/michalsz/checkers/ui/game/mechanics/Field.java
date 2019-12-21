@@ -3,6 +3,8 @@ package pl.michalsz.checkers.ui.game.mechanics;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -12,7 +14,7 @@ import java.util.LinkedList;
 
 import pl.michalsz.checkers.R;
 
-class Field implements ImageView.OnClickListener {
+class Field implements ImageView.OnClickListener, Parcelable {
 
     private Board board;
     private ImageView image;
@@ -41,12 +43,11 @@ class Field implements ImageView.OnClickListener {
         }
     }
 
-    class Task implements Runnable{
+    class Task implements Runnable {
         boolean updateLatency;
         int imageId;
 
-        Task(boolean updateLatency, int imageId)
-        {
+        Task(boolean updateLatency, int imageId) {
             this.updateLatency = updateLatency;
             this.imageId = imageId;
         }
@@ -54,12 +55,13 @@ class Field implements ImageView.OnClickListener {
         @Override
         public void run() {
             image.setImageResource(imageId);
-            if(updateLatency)
+            if (updateLatency)
                 fullLatency -= singleLatency;
         }
 
 
     }
+
     static void addLatency() {
         fullLatency += singleLatency;
     }
@@ -80,6 +82,26 @@ class Field implements ImageView.OnClickListener {
         return image;
     }
 
+    void setImage(ImageView view) {
+        image = view;
+        image.setOnClickListener(this);
+        if (pawn != null) {
+            if (pawn.isWhite()) {
+                if (pawn.isKing()) {
+                    image.setImageResource(R.mipmap.white_king);
+                } else {
+                    image.setImageResource(R.mipmap.white_man);
+                }
+            } else {
+                if (pawn.isKing()) {
+                    image.setImageResource(R.mipmap.red_king);
+                } else {
+                    image.setImageResource(R.mipmap.red_man);
+                }
+            }
+        }
+    }
+
     void setPawn(Pawn pawn) {
         this.pawn = pawn;
     }
@@ -91,14 +113,14 @@ class Field implements ImageView.OnClickListener {
 
     void setHighlight(final Activity activity, int id) {
         final Drawable highlight = activity.getDrawable(id);
-        if ((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn())){
+        if ((!board.isRedPlayer() && board.isWhiteTurn()) || (!board.isWhitePlayer() && !board.isWhiteTurn())) {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     image.setBackground(highlight);
                 }
             }, fullLatency);
-        } else{
+        } else {
             image.setBackground(highlight);
         }
     }
@@ -106,19 +128,19 @@ class Field implements ImageView.OnClickListener {
     void setImage(boolean white, boolean king) {
         boolean update = false;
         if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
-             update = true;
+            update = true;
         if (white) {
             if (king) {
-                handler.postDelayed(new Task(update,R.mipmap.white_king), fullLatency);
+                handler.postDelayed(new Task(update, R.mipmap.white_king), fullLatency);
             } else {
-                handler.postDelayed(new Task(update,R.mipmap.white_man), fullLatency);
+                handler.postDelayed(new Task(update, R.mipmap.white_man), fullLatency);
             }
         } else {
             if (king) {
-                handler.postDelayed(new Task(update,R.mipmap.red_king), fullLatency);
+                handler.postDelayed(new Task(update, R.mipmap.red_king), fullLatency);
 
             } else {
-                handler.postDelayed(new Task(update,R.mipmap.red_man), fullLatency);
+                handler.postDelayed(new Task(update, R.mipmap.red_man), fullLatency);
             }
         }
     }
@@ -141,7 +163,6 @@ class Field implements ImageView.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        System.out.println("OnClick" + fullLatency);
         if (fullLatency == 0) {
             Pair chosenField = board.getChosenField();
             if (board.getAttackOption().size() > 0) {
@@ -286,4 +307,35 @@ class Field implements ImageView.OnClickListener {
             }
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.board, flags);
+        dest.writeParcelable(this.position, flags);
+        dest.writeParcelable(this.pawn, flags);
+    }
+
+    private Field(Parcel in) {
+        this.board = in.readParcelable(Board.class.getClassLoader());
+        this.position = in.readParcelable(Pair.class.getClassLoader());
+        this.pawn = in.readParcelable(Pawn.class.getClassLoader());
+        this.image = null;
+    }
+
+    public static final Parcelable.Creator<Field> CREATOR = new Parcelable.Creator<Field>() {
+        @Override
+        public Field createFromParcel(Parcel source) {
+            return new Field(source);
+        }
+
+        @Override
+        public Field[] newArray(int size) {
+            return new Field[size];
+        }
+    };
 }

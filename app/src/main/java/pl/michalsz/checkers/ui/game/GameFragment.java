@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationView;
 
+import pl.michalsz.checkers.MainActivity;
 import pl.michalsz.checkers.R;
 import pl.michalsz.checkers.ui.game.mechanics.Board;
 
@@ -27,10 +28,12 @@ public class GameFragment extends Fragment {
     private ImageView[][] boardUI;
     private Board boardMechanics;
     private NavigationView navigationView;
+    private boolean needClean;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        savedInstanceState = ((MainActivity)getActivity()).getOutState();
         boolean whitePlayer = GameFragmentArgs.fromBundle(getArguments()).getWhite();
         boolean redPlayer = GameFragmentArgs.fromBundle(getArguments()).getRed();
         View view = inflater.inflate(R.layout.fragment_game, container, false);
@@ -61,21 +64,43 @@ public class GameFragment extends Fragment {
         }
         navigationView = getActivity().findViewById(R.id.nav_view);
         setNavigationViewAction();
-        boardMechanics = new Board(boardUI, getActivity(), whitePlayer, redPlayer);
+        if (savedInstanceState != null){
+            needClean = false;
+            boardMechanics = savedInstanceState.getParcelable("board");
+            boardMechanics.postParcelable(boardUI, getActivity());
+        } else {
+            needClean = true;
+            boardMechanics = new Board(boardUI, getActivity(), whitePlayer, redPlayer);
+        }
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        boardMechanics.clean();
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                boardMechanics.start();
-            }
-        }, 20);
+        if(needClean){
+            boardMechanics.clean();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    boardMechanics.start();
+                }
+            }, 20);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        Bundle outState = new Bundle();
+        outState.putParcelable("board", boardMechanics);
+        ((MainActivity)getActivity()).setOutState(outState);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
 
     }
 
@@ -85,7 +110,13 @@ public class GameFragment extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         boardMechanics.clean();
-                        boardMechanics.start();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                boardMechanics.start();
+                            }
+                        }, 20);
                         DrawerLayout mDrawerLayout = getActivity().findViewById(R.id.drawer_layout);
                         mDrawerLayout.closeDrawers();
                         return false;

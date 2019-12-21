@@ -1,6 +1,9 @@
 package pl.michalsz.checkers.ui.game.mechanics;
 
-final class Pair {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+final class Pair implements Parcelable {
     private boolean set;
     private int X;
     private int Y;
@@ -64,6 +67,36 @@ final class Pair {
         }
         return ((Pair) o).X == X && ((Pair) o).Y == Y;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.set ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.X);
+        dest.writeInt(this.Y);
+    }
+
+    private Pair(Parcel in) {
+        this.set = in.readByte() != 0;
+        this.X = in.readInt();
+        this.Y = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Pair> CREATOR = new Parcelable.Creator<Pair>() {
+        @Override
+        public Pair createFromParcel(Parcel source) {
+            return new Pair(source);
+        }
+
+        @Override
+        public Pair[] newArray(int size) {
+            return new Pair[size];
+        }
+    };
 }
 
 

@@ -1,6 +1,8 @@
 package pl.michalsz.checkers.ui.game.mechanics;
 
 import android.app.Activity;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
 
 import androidx.navigation.NavController;
@@ -14,7 +16,7 @@ import pl.michalsz.checkers.R;
 import pl.michalsz.checkers.ui.game.GameFragmentDirections;
 
 
-public class Board {
+public class Board implements Parcelable {
 
     private Pair chosenField;
     private Field[][] board = new Field[8][8];
@@ -70,8 +72,7 @@ public class Board {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (i % 2 == j % 2 && board[i][j].getPawn() != null) {
-                    if (board[i][j].getPawn().isWhite())
-                    {
+                    if (board[i][j].getPawn().isWhite()) {
                         whitePawns.add(board[i][j].getPawn());
                     } else {
                         redPawns.add(board[i][j].getPawn());
@@ -124,11 +125,11 @@ public class Board {
         return isWhitePlayer;
     }
 
-    boolean isRedPlayer(){
+    boolean isRedPlayer() {
         return isRedPlayer;
     }
 
-    boolean isCopy(){
+    boolean isCopy() {
         return isCopy;
     }
 
@@ -199,7 +200,7 @@ public class Board {
         attackOption.clear();
         possibleAction();
         chosenField.unset();
-        if( ((whiteTurn && !isWhitePlayer)
+        if (((whiteTurn && !isWhitePlayer)
                 || (!whiteTurn && !isRedPlayer)) && !isCopy) {
             actionAI();
             whiteTurn = !whiteTurn;
@@ -320,7 +321,6 @@ public class Board {
     }
 
     private void possibleAttack(LinkedList<Pawn> pawns) {
-
         boolean empty = true;
         int priority;
         for (Pawn pawn : pawns) {
@@ -616,7 +616,7 @@ public class Board {
         if (move.getDestination().size() > 1) {
             update = attackAI(move.getPawn(), move.getDestination());
         } else {
-            if(!isCopy)
+            if (!isCopy)
                 Field.addLatency();
             update = movePawn(move.getPawn(), move.getDestination().get(0));
         }
@@ -628,12 +628,78 @@ public class Board {
         Pair destination = null;
         listOfDestination.remove();
         while (listOfDestination.size() > 0) {
-            if(!isCopy)
+            if (!isCopy)
                 Field.addLatency();
             destination = listOfDestination.poll();
             attackWithPawn(pawn, destination);
             pawn.setCurrentPosition(destination);
         }
         return destination;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.chosenField, flags);
+        int numOfArrays = 8;
+        dest.writeInt(numOfArrays); // save number of arrays
+        for (int i = 0; i < numOfArrays; i++) {
+            dest.writeTypedArray(board[i], flags);
+        }
+        dest.writeSerializable(this.attackOption);
+        dest.writeInt(this.drawWhite);
+        dest.writeInt(this.drawRed);
+        dest.writeByte(this.whiteTurn ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isCopy ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isWhitePlayer ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isRedPlayer ? (byte) 1 : (byte) 0);
+    }
+
+    private Board(Parcel in) {
+        this.chosenField = in.readParcelable(Pair.class.getClassLoader());
+        int numberOfArrays = in.readInt();
+        this.board = new Field[numberOfArrays][];
+        for (int i = 0; i < numberOfArrays; i++) {
+            this.board[i] = in.createTypedArray(Field.CREATOR);
+        }
+        this.activity = null;
+        this.whitePawns = new LinkedList<>();
+        this.redPawns = new LinkedList<>();
+        this.attackOption = new PriorityQueue<>();
+        this.highlightsFields = new LinkedList<>();
+        this.drawWhite = in.readInt();
+        this.drawRed = in.readInt();
+        this.whiteTurn = in.readByte() != 0;
+        this.isCopy = in.readByte() != 0;
+        this.isWhitePlayer = in.readByte() != 0;
+        this.isRedPlayer = in.readByte() != 0;
+    }
+
+    public static final Parcelable.Creator<Board> CREATOR = new Parcelable.Creator<Board>() {
+        @Override
+        public Board createFromParcel(Parcel source) {
+            return new Board(source);
+        }
+
+        @Override
+        public Board[] newArray(int size) {
+            return new Board[size];
+        }
+    };
+
+    public void postParcelable(ImageView[][] boardMain, Activity activity) {
+        this.activity = activity;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (i % 2 == j % 2) {
+                    board[i][j].setImage(boardMain[i][j]);
+                }
+            }
+        }
+        possibleAction();
     }
 }
