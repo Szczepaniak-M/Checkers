@@ -25,7 +25,7 @@ public class MainActivity extends FragmentActivity implements NavController.OnDe
     private DrawerLayout drawer;
     private GestureDetector detector;
     private Handler handler;
-    private Bundle outState;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,12 +130,16 @@ public class MainActivity extends FragmentActivity implements NavController.OnDe
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
-    public void setOutState(Bundle outState) {
-        this.outState = outState;
+    public void setBundle(Bundle bundle) {
+        this.bundle = bundle;
     }
 
-    public Bundle getOutState() {
-        return outState;
+    public void setBundle() {
+        this.bundle = null;
+    }
+
+    public Bundle getBundle() {
+        return bundle;
     }
 }
 

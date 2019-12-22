@@ -44,8 +44,8 @@ class Field implements ImageView.OnClickListener, Parcelable {
     }
 
     class Task implements Runnable {
-        boolean updateLatency;
-        int imageId;
+        private boolean updateLatency;
+        private int imageId;
 
         Task(boolean updateLatency, int imageId) {
             this.updateLatency = updateLatency;

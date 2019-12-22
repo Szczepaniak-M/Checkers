@@ -646,7 +646,7 @@ public class Board implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(this.chosenField, flags);
         int numOfArrays = 8;
-        dest.writeInt(numOfArrays); // save number of arrays
+        dest.writeInt(numOfArrays);
         for (int i = 0; i < numOfArrays; i++) {
             dest.writeTypedArray(board[i], flags);
         }

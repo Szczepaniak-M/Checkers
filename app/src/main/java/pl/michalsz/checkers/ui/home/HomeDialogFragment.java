@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import pl.michalsz.checkers.MainActivity;
 import pl.michalsz.checkers.R;
 
 public class HomeDialogFragment extends DialogFragment {
@@ -30,6 +31,7 @@ public class HomeDialogFragment extends DialogFragment {
         txtRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).setBundle();
                 HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action =  HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
                 action.setRed(true);
                 action.setWhite(false);
@@ -40,6 +42,7 @@ public class HomeDialogFragment extends DialogFragment {
         txtWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).setBundle();
                 HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action =  HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
                 action.setRed(false);
                 action.setWhite(true);

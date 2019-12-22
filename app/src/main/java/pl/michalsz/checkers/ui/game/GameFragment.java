@@ -33,7 +33,7 @@ public class GameFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        savedInstanceState = ((MainActivity)getActivity()).getOutState();
+        savedInstanceState = ((MainActivity)getActivity()).getBundle();
         boolean whitePlayer = GameFragmentArgs.fromBundle(getArguments()).getWhite();
         boolean redPlayer = GameFragmentArgs.fromBundle(getArguments()).getRed();
         View view = inflater.inflate(R.layout.fragment_game, container, false);
@@ -94,14 +94,8 @@ public class GameFragment extends Fragment {
     public void onDestroy() {
         Bundle outState = new Bundle();
         outState.putParcelable("board", boardMechanics);
-        ((MainActivity)getActivity()).setOutState(outState);
+        ((MainActivity)getActivity()).setBundle(outState);
         super.onDestroy();
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
     }
 
     private void setNavigationViewAction() {
