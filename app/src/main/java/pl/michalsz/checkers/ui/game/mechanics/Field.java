@@ -57,6 +57,8 @@ class Field implements ImageView.OnClickListener, Parcelable {
             image.setImageResource(imageId);
             if (updateLatency)
                 fullLatency -= singleLatency;
+            else if(imageId ==R.mipmap.red_king)
+                image.setRotation(180);
         }
 
 
@@ -303,7 +305,8 @@ class Field implements ImageView.OnClickListener, Parcelable {
             pawn.setKing();
             if (image != null) {
                 this.setImage(board.isWhiteTurn(), pawn.isKing());
-                addLatency();
+                if ((!board.isRedPlayer() && !board.isWhiteTurn()) || (!board.isWhitePlayer() && board.isWhiteTurn()))
+                    addLatency();
             }
         }
     }
