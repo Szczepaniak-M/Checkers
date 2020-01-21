@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
         btnPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                HomeFragmentDirections.ActionNavHomeToNavGame action =  HomeFragmentDirections.actionNavHomeToNavGame();
+                HomeFragmentDirections.ActionNavHomeToNavGame action = HomeFragmentDirections.actionNavHomeToNavGame();
                 action.setRed(true);
                 action.setRed(true);
                 Navigation.findNavController(getView()).navigate(action);

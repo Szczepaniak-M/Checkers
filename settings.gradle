@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='Checkers2.0'
+rootProject.name='Checkers'

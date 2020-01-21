@@ -94,7 +94,7 @@ public class GameFragment extends Fragment {
     public void onDestroy() {
         Bundle outState = new Bundle();
         outState.putParcelable("board", boardMechanics);
-        ((MainActivity)getActivity()).setBundle(outState);
+        ((MainActivity) getActivity()).setBundle(outState);
         super.onDestroy();
     }
 

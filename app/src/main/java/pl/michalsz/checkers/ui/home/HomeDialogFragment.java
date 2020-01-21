@@ -19,6 +19,7 @@ public class HomeDialogFragment extends DialogFragment {
 
 
     private NavController navController;
+
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -31,8 +32,8 @@ public class HomeDialogFragment extends DialogFragment {
         txtRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setBundle();
-                HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action =  HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
+                ((MainActivity) getActivity()).setBundle();
+                HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action = HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
                 action.setRed(true);
                 action.setWhite(false);
                 navController.navigate(action);
@@ -42,8 +43,8 @@ public class HomeDialogFragment extends DialogFragment {
         txtWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).setBundle();
-                HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action =  HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
+                ((MainActivity) getActivity()).setBundle();
+                HomeDialogFragmentDirections.ActionNavHomeAlertToNavGame action = HomeDialogFragmentDirections.actionNavHomeAlertToNavGame();
                 action.setRed(false);
                 action.setWhite(true);
                 navController.navigate(action);

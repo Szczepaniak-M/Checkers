@@ -26,7 +26,7 @@ public class Pawn implements Comparable<Pawn>, Parcelable {
         king = oldPawn.king;
         amountOfActions = oldPawn.amountOfActions;
         currentPosition = new Pair(oldPawn.currentPosition.getX(), oldPawn.currentPosition.getY());
-        for(LinkedList<Pair> action:oldPawn.possibleAction)
+        for (LinkedList<Pair> action : oldPawn.possibleAction)
             possibleAction.add(new LinkedList<>(action));
     }
 
@@ -39,17 +39,17 @@ public class Pawn implements Comparable<Pawn>, Parcelable {
     }
 
     int getAmountOfActions() {
-        return  amountOfActions;
+        return amountOfActions;
     }
 
     void setCurrentPosition(Pair currentPosition) {
         this.currentPosition = currentPosition;
     }
 
-    int setPossibleAction(LinkedList<LinkedList<Pair>> possibleAttack){
+    int setPossibleAction(LinkedList<LinkedList<Pair>> possibleAttack) {
         setPossibleActionEmpty();
         amountOfActions = possibleAttack.get(0).size();
-        for(int i = 0; i < possibleAttack.size(); i++)
+        for (int i = 0; i < possibleAttack.size(); i++)
             this.possibleAction.add(new LinkedList<>(possibleAttack.get(i)));
         return amountOfActions;
     }
@@ -59,8 +59,8 @@ public class Pawn implements Comparable<Pawn>, Parcelable {
         amountOfActions = possibleAction.size();
     }
 
-    void setPossibleActionEmpty(){
-        for(int i = 0; i < possibleAction.size(); i++)
+    void setPossibleActionEmpty() {
+        for (int i = 0; i < possibleAction.size(); i++)
             possibleAction.get(i).clear();
         possibleAction.clear();
         amountOfActions = 0;
@@ -79,7 +79,9 @@ public class Pawn implements Comparable<Pawn>, Parcelable {
     }
 
     @Override
-    public int compareTo(Pawn other) { return (this.amountOfActions - other.amountOfActions)* -1; }
+    public int compareTo(Pawn other) {
+        return (this.amountOfActions - other.amountOfActions) * -1;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -91,8 +93,9 @@ public class Pawn implements Comparable<Pawn>, Parcelable {
         }
         return ((Pawn) o).currentPosition.equals(currentPosition);
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Pawn: " + currentPosition.getX() + " " + currentPosition.getY() + " ";
     }
 

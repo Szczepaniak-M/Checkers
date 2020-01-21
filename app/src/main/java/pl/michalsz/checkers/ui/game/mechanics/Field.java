@@ -57,11 +57,9 @@ class Field implements ImageView.OnClickListener, Parcelable {
             image.setImageResource(imageId);
             if (updateLatency)
                 fullLatency -= singleLatency;
-            else if(imageId ==R.mipmap.red_king)
+            else if (imageId == R.mipmap.red_king)
                 image.setRotation(180);
         }
-
-
     }
 
     static void addLatency() {

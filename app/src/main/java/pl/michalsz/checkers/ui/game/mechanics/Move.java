@@ -18,7 +18,7 @@ class Move {
 
     LinkedList<Pair> getDestination() {
         LinkedList<Pair> newDestination = new LinkedList<>();
-        for(Pair pair : destination){
+        for (Pair pair : destination) {
             newDestination.add(new Pair(pair));
         }
         return newDestination;
