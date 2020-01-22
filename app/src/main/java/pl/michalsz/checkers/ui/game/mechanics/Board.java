@@ -306,9 +306,9 @@ public class Board implements Parcelable {
                         }
                     }
                 }
-                if (pawn.getAmountOfActions() > 0) {
-                    isMove = true;
-                }
+            }
+            if (pawn.getAmountOfActions() > 0) {
+                isMove = true;
             }
         }
         if (!isMove && !isCopy) {
