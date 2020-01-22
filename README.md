@@ -1,5 +1,9 @@
 # Checkers
+## Google Play
+The game is available in Google Play
 
+https://play.google.com/store/apps/details?id=pl.michalsz.checkers
+## Rules
 - The game is played  on an 8×8 checkerboard. 
 - Every player starts the game with 12 pieces set on dark squares. 
 - The player with white pieces makes the first move and then the players alternate turns.
