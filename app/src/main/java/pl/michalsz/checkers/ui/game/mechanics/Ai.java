@@ -104,14 +104,14 @@ class Ai {
     }
 
     private Move selectMove(DecisionTree decisionTree) {
-        int maxMainScore = -20;
+        int maxMainScore = -37;
         Move selectedMove = null;
         for (DecisionTree firstLayer : decisionTree.getChildren()) {
 
-            int maxFirstLayerScore = -20;
+            int maxFirstLayerScore = -37;
             for (DecisionTree secondLayer : firstLayer.getChildren()) {
 
-                int maxSecondLayerScore = -20;
+                int maxSecondLayerScore = -37;
                 for (DecisionTree thirdLayer : secondLayer.getChildren()) {
                     if (thirdLayer.getScore() >= maxSecondLayerScore) {
                         maxSecondLayerScore = thirdLayer.getScore();
