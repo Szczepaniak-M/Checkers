@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import pl.michalsz.checkers.MainActivity;
 import pl.michalsz.checkers.R;
 
 public class HomeFragment extends Fragment {
@@ -30,9 +31,10 @@ public class HomeFragment extends Fragment {
         btnPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                ((MainActivity) getActivity()).setBundle();
                 HomeFragmentDirections.ActionNavHomeToNavGame action = HomeFragmentDirections.actionNavHomeToNavGame();
                 action.setRed(true);
-                action.setRed(true);
+                action.setWhite(true);
                 Navigation.findNavController(getView()).navigate(action);
             }
         });
